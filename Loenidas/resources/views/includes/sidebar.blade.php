@@ -1,8 +1,13 @@
-@if (isset($menus))
 @php
-extract($menus)
+  $r = request()
+      ->route()
+      ->getAction()['controller'];
+  $r = explode('\\', $r);
+  $r = $r[count($r) - 1];
+  $r = explode('@', $r);
+  $controller = $r[0];
+  $method = $r[1];
 @endphp
-@endif
 <div class="sidebar" id="sidebar">
   <div class="sidebar-inner slimscroll">
     <div id="sidebar-menu" class="sidebar-menu">
@@ -13,7 +18,8 @@ extract($menus)
           </a>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}" alt="img" /><span>Menu</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+              alt="img" /><span>Menu</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="MenuList.html">Menu List</a></li>
@@ -22,55 +28,62 @@ extract($menus)
           </ul>
         </li>
         <li class="submenu">
-          <a id="inventoryTab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}" alt="img" />
+          <a id="InventoryControllerTab" href="javascript:void(0);"><img
+              src="{{ asset('assets/img/icons/sales1.svg') }}" alt="img" />
             <span>Inventory</span>
             <span class="menu-arrow"></span>
           </a>
           <ul>
             <li>
-              <a id="i-1" href="{{ route('inventory.index') }}">Inventory Status</a>
+              <a id="I-index" href="{{ route('inventory.index') }}">Inventory Status</a>
             </li>
             <li>
-              <a id="i-2" href="{{ route('inventory.inventoryCategory') }}">Stocks Category</a>
+              <a id="I-inventoryCategory" href="{{ route('inventory.inventoryCategory') }}">Stocks Category</a>
             </li>
             <li>
-              <a id="i-3" href="{{ route('inventory.inventoryRestocking') }}">Inventory Restocking</a>
+              <a id="I-inventoryRestocking" href="{{ route('inventory.inventoryRestocking') }}">Inventory Restocking</a>
             </li>
             <li>
-              <a id="i-4" href="{{ route('inventory.inventoryRestockingHistory') }}">Restocking History</a>
+              <a id="I-inventoryRestockingHistory" href="{{ route('inventory.inventoryRestockingHistory') }}">Restocking
+                History</a>
             </li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}" alt="img" /><span>Expenses</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}"
+              alt="img" /><span>Expenses</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="expenses.html">Expenses List</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/purchase1.svg') }}" alt="img" /><span>Orders</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/purchase1.svg') }}"
+              alt="img" /><span>Orders</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="OrderList.html">Order List</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/purchase1.svg') }}" alt="img" /><span>Reservation</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/purchase1.svg') }}"
+              alt="img" /><span>Reservation</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="reservationStatus.html">Reservation List</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/quotation1.svg') }}" alt="img" /><span>Point of Sales</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/quotation1.svg') }}"
+              alt="img" /><span>Point of Sales</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="pos.html">Point of Sales</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/transcation.svg') }}" alt="img" /><span>Transaction</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/transcation.svg') }}"
+              alt="img" /><span>Transaction</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li>
@@ -86,7 +99,8 @@ extract($menus)
         </li>
 
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/time.svg') }}" alt="img" /><span>Sales</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/time.svg') }}"
+              alt="img" /><span>Sales</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="salesdaily.html">Sales List</a></li>
@@ -95,14 +109,16 @@ extract($menus)
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/places.svg') }}" alt="img" /><span>Branch</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/places.svg') }}"
+              alt="img" /><span>Branch</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="branch.html">Branch List</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/users1.svg') }}" alt="img" /><span>Users</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/users1.svg') }}"
+              alt="img" /><span>Users</span>
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="{{ route('staffs.index') }}">Users List</a></li>
@@ -114,7 +130,7 @@ extract($menus)
 </div>
 <script>
   haba_delay(() => {
-    document.getElementById("{{ $menuactive }}Tab").click();
-    document.getElementById("{{ $menuactive[0] }}-{{$submenuactive}}").classList.add("submenuactive");
+    document.getElementById("{{ $controller }}Tab").click();
+    document.getElementById("{{ $controller[0] }}-{{ $method }}").classList.add("submenuactive");
   });
 </script>

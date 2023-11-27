@@ -19,38 +19,22 @@ class InventoryController extends Controller
   private function inventoryStatus()
   {
     $inventories = Inventory::all();
-    $menus = [
-      'menuactive' => 'inventory',
-      'submenuactive' => 1
-    ];
-    return view("admin.inventoryStatus", compact("inventories", "menus"));
+    return view("admin.inventoryStatus", compact("inventories"));
   }
 
   public function inventoryCategory()
   {
-    $menus = [
-      'menuactive' => 'inventory',
-      'submenuactive' => 2
-    ];
-    return view('admin.inventoryCategory', compact("menus"));
+    return view('admin.inventoryCategory');
   }
 
   public function inventoryRestocking()
   {
-    $menus = [
-      'menuactive' => 'inventory',
-      'submenuactive' => 3
-    ];
-    return view('admin.inventoryRestocking', compact("menus"));
+    return view('admin.inventoryRestocking');
   }
 
   public function inventoryRestockingHistory()
   {
-    $menus = [
-      'menuactive' => 'inventory',
-      'submenuactive' => 4
-    ];
-    return view('admin.inventoryRestockingHistory', compact("menus"));
+    return view('admin.inventoryRestockingHistory');
   }
 
   /**
