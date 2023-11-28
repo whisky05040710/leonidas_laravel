@@ -190,9 +190,6 @@
                     <td>{{ $inventory->unitCost }}</td>
                     <td>{{ $inventory->reorderPoint }}</td>
                     <td>
-                      <a class="me-3" href="inventoryStockDetails.html">
-                        <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
-                      </a>
                       <a class="me-3" href="inventoryStocksEdit.html">
                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                       </a>

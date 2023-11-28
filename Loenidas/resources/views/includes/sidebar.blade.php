@@ -24,7 +24,6 @@
           <ul>
             <li><a href="MenuList.html">Menu List</a></li>
             <li><a href="MenuCategory.html">Menu Category</a></li>
-            <li><a href="MenuAvailable.html">Menu Available</a></li>
           </ul>
         </li>
         <li class="submenu">
@@ -38,10 +37,10 @@
               <a id="I-index" href="{{ route('inventory.index') }}">Inventory Status</a>
             </li>
             <li>
-              <a id="I-inventoryCategory" href="{{ route('inventory.inventoryCategory') }}">Stocks Category</a>
+              <a id="I-inventoryCategory" href="{{ route('inventory.inventoryCategory') }}">Inventory Category</a>
             </li>
             <li>
-              <a id="I-inventoryRestocking" href="{{ route('inventory.inventoryRestocking') }}">Inventory Restocking</a>
+              <a id="I-inventoryRestocking" href="{{ route('inventory.inventoryRestocking') }}">Restocking Cart</a>
             </li>
             <li>
               <a id="I-inventoryRestockingHistory" href="{{ route('inventory.inventoryRestockingHistory') }}">Restocking
@@ -50,15 +49,7 @@
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}"
-              alt="img" /><span>Expenses</span>
-            <span class="menu-arrow"></span></a>
-          <ul>
-            <li><a href="expenses.html">Expenses List</a></li>
-          </ul>
-        </li>
-        <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/purchase1.svg') }}"
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/transcation.svg') }}"
               alt="img" /><span>Orders</span>
             <span class="menu-arrow"></span></a>
           <ul>
@@ -70,31 +61,16 @@
               alt="img" /><span>Reservation</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="reservationStatus.html">Reservation List</a></li>
+            <li><a href="reservationList.html">Reservation List</a></li>
+            <li><a href="reservationTable.html">Reservation Table</a></li>
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/quotation1.svg') }}"
-              alt="img" /><span>Point of Sales</span>
+          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}"
+              alt="img" /><span>Expenses</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="pos.html">Point of Sales</a></li>
-          </ul>
-        </li>
-        <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/transcation.svg') }}"
-              alt="img" /><span>Transaction</span>
-            <span class="menu-arrow"></span></a>
-          <ul>
-            <li>
-              <a href="transactionPlacedOrderList.html">Placed Orders List</a>
-            </li>
-            <li>
-              <a href="transactionPaidOrderList.html">Paid Orders List</a>
-            </li>
-            <li>
-              <a href="transactionReservationList.html">Reservations List</a>
-            </li>
+            <li><a href="expenses.html">Expenses List</a></li>
           </ul>
         </li>
 
@@ -103,8 +79,8 @@
               alt="img" /><span>Sales</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="salesdaily.html">Sales List</a></li>
-            <li><a href="salesmonthly.html">Income Statement</a></li>
+            <li><a href="salesdaily.html">Daily Sales</a></li>
+            <li><a href="salesmonthly.html">Monthly Income</a></li>
             <li><a href="salesReport.html">Sales Report</a></li>
           </ul>
         </li>
@@ -121,7 +97,8 @@
               alt="img" /><span>Users</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="{{ route('staffs.index') }}">Users List</a></li>
+            <li><a href="{{ route('staffs.index') }}">Staff List</a></li>
+            <li><a href="{{ route('staffs.index') }}">Customer List</a></li>
           </ul>
         </li>
       </ul>
