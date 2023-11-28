@@ -14,8 +14,18 @@ class MenuController extends Controller
      */
     public function index()
     {
+        return $this->menu();
+    }
+
+    private function menu()
+    {
         $menus = Menu::all();
         return view('admin.menu', compact('menus'));
+    }
+    public function menuCategory()
+    {
+        $menuCategories = MenuCategory::all();
+        return view('admin.menuCategory', compact('menuCategories'));
     }
 
     /**

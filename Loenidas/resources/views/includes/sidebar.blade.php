@@ -22,8 +22,8 @@
               alt="img" /><span>Menu</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="MenuList.html">Menu List</a></li>
-            <li><a href="MenuCategory.html">Menu Category</a></li>
+            <li><a id="M-index" href="{{ route('menu.index') }}">Menu List</a></li>
+            <li><a id="M-menuCategory" href="{{ route('menu.menuCategory') }}">Menu Category</a></li>
           </ul>
         </li>
         <li class="submenu">

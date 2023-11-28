@@ -8,8 +8,8 @@
                     <h6>Manage your Menu</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('menu.create') }}" class="btn btn-added">
-                        <img src="assets/img/icons/plus.svg" alt="img">Add Menu
+                    <a class="btn btn-added">
+                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Add Menu
                     </a>
                 </div>
             </div>
@@ -94,9 +94,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="me-3" href="{{ route('menu.show', $menu->id) }}">
+                                            {{-- <a class="me-3" href="{{ route('menu.show', $menu->id) }}">
                                                 <img src="assets/img/icons/eye.svg" alt="img">
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
