@@ -27,8 +27,8 @@
     <div class="card">
       <div class="card-body">
         <section class="comp-section comp-cards">
-          @foreach ($categories as $category)
           <div class="row">
+            @foreach ($categories as $category)
             <div class="col-12 col-md-6 col-lg-4 d-flex" data-bs-toggle="modal" data-bs-target="#inventorycategory-{{ $category->id }}">
               <div class="card flex-fill bg-white">
                 <div class="card-header d-flex align-items-center justify-content-center" style="border: 1px solid black; background-color:#4dcc4b; ">
@@ -39,36 +39,36 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="modal fade" id="inventorycategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header" style="background-color: #EDEDED; text-align: center;">
-                  <div class="d-flex align-items-center justify-content-center flex-column w-100">
-                    <h4 class="modal-title" id="menuTitle">{{ $category->name }}</h4>
-                    <input type="text" class="form-control align-self-center mt-2" id="editMenuTitle" style="line-height: 50px; display: none; width: 150px; height: 50px; font-size: 1.4rem; margin-left:40px;">
+            <div class="modal fade" id="inventorycategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color: #EDEDED; text-align: center;">
+                    <div class="d-flex align-items-center justify-content-center flex-column w-100">
+                      <h4 class="modal-title" id="menuTitle">{{ $category->name }}</h4>
+                      <input type="text" class="form-control align-self-center mt-2" id="editMenuTitle" style="line-height: 50px; display: none; width: 150px; height: 50px; font-size: 1.4rem; margin-left:40px;">
+                    </div>
+                    <br>
+                    <div class="mt-2 text-center">
+                      <button type="button" class="btn btn-secondary me-2" id="editButton" onclick="editMenuTitle()" style="background-color: #4dcc4b;"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="mt-2 text-center">
+                      <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#DeleteModal"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                  <br>
-                  <div class="mt-2 text-center">
-                    <button type="button" class="btn btn-secondary me-2" id="editButton" onclick="editMenuTitle()" style="background-color: #4dcc4b;"><i class="fas fa-edit"></i></button>
-                  </div>
-                  <div class="mt-2 text-center">
-                    <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#DeleteModal"><i class="fas fa-trash-alt"></i></button>
-                  </div>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body" style="background-color: #EDEDED;">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="form-group text-center">
-                        <div class="modal-box-report">
-                          <ol style="list-style-type: decimal; text-align: left; font-size: 16px;">
-                            @foreach ($category->inventories as $inventory)
-                            <li>{{ $inventory->stockName }}</li>
-                            @endforeach
-                          </ol>
+                  <div class="modal-body" style="background-color: #EDEDED;">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group text-center">
+                          <div class="modal-box-report">
+                            <ol style="list-style-type: decimal; text-align: left; font-size: 16px;">
+                              @foreach ($category->inventories as $inventory)
+                              <li>{{ $inventory->stockName }}</li>
+                              @endforeach
+                            </ol>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -76,8 +76,8 @@
                 </div>
               </div>
             </div>
+            @endforeach
           </div>
-          @endforeach
         </section>
       </div>
     </div>
