@@ -18,34 +18,91 @@
                 <div class="card-body">
                     <section class="comp-section comp-cards">
                         <div class="row">
-                            @foreach ($menuCategories as $category)
-                            <div class="col-12 col-md-6 col-lg-4 d-flex" data-bs-toggle="modal"
-                                data-bs-target="#menucategory">
+                            @foreach ($categories as $category)
+                            <div class="col-12 col-md-6 col-lg-4 d-flex" data-bs-toggle="modal" data-bs-target="#menucategory-{{ $category->id }}">
                                 <div class="card flex-fill bg-white">
                                     <div class="card-header d-flex align-items-center justify-content-center"
                                         style="border: 1px solid black; background-color:#4dcc4b; ">
-                                        <h4 class="card-title mb-0">{{ $category->menuCategoryName }}</h4>
+                                        <h4 class="card-title mb-0">{{ $category->name }}</h4>
                                     </div>
                                     <div class="card-body d-flex align-items-center justify-content-center"
                                         style="border: 1px solid black;">
-                                        <h1 class="card-text mb-0">15</h1>
+                                        <h1 class="card-text mb-0">{{ $category->reference_count }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="modal fade" id="menucategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #EDEDED; text-align: center;">
+                                            <div class="d-flex align-items-center justify-content-center flex-column w-100">
+                                                <h4 class="modal-title" id="menuTitle">{{ $category->name }}</h4>
+                                                <input type="text" class="form-control align-self-center mt-2" id="editMenuTitle"
+                                                    style="line-height: 50px; display: none; width: 150px; height: 50px; font-size: 1.4rem; margin-left:40px;">
+                        
+                                            </div>
+                                            <br>
+                                            <div class="mt-2 text-center">
+                                                <button type="button" class="btn btn-secondary me-2" id="editButton" onclick="editMenuTitle()"
+                                                    style="background-color: #4dcc4b;"><i class="fas fa-edit"></i></button>
+                                            </div>
+                                            <div class="mt-2 text-center">
+                                                <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal"
+                                                    data-bs-target="#DeleteModal"><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                        
+                                        <div class="modal-body" style="background-color: #EDEDED;">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group text-center">
+                                                        <div class="modal-box-report">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table mb-0">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Menu List</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach ($category->menus as $menu)
+                                                                            <tr>
+                                                                                <td>{{ $menu->menuName }}</td>
+                                                                            </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
                                     </div>
                                 </div>
                             </div>
                             @endforeach
+
                         </div>
                     </section>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="menucategory" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
+
+    <div class="modal fade" id="menucategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #EDEDED; text-align: center;">
                     <div class="d-flex align-items-center justify-content-center flex-column w-100">
-                        <h4 class="modal-title" id="menuTitle">Lunch</h4>
+                        <h4 class="modal-title" id="menuTitle">{{ $category->name }}</h4>
                         <input type="text" class="form-control align-self-center mt-2" id="editMenuTitle"
                             style="line-height: 50px; display: none; width: 150px; height: 50px; font-size: 1.4rem; margin-left:40px;">
 
@@ -79,15 +136,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($category->menus as $menu)
                                                     <tr>
-                                                        <td>Grilled Chicken Salad</td>
+                                                        <td>{{ $menu->menuName }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Pasta Primavera</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Vegetarian Wrap</td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -131,7 +184,7 @@
         }
     </script>
 
-    <!--waggggggg-->
+    <!--Add-->
     <div class="modal fade" id="menucategoryAdd" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -142,14 +195,15 @@
                     </button>
                 </div>
                 <div class="modal-body" style="background-color: #EDEDED;">
-                    {{-- <form action="{{ route('menuCategory.store') }}" method="POST"> --}}
+                    <form action="/menu/menuCategory" method="post">
+                        @csrf
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group text-center">
                                 <div class="modal-box-report">
 
                                     <input type="text" class="form-control" id="categoryInput"
-                                        placeholder="Enter Category Name" name="menuCategoryName">
+                                        placeholder="Enter Category Name" name="name">
                                 </div>
                             </div>
                         </div>
@@ -158,13 +212,14 @@
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary me-2" >Add</button>
                     </div>
-                    {{-- </form> --}}
+                    </form>
                 </div>
 
             </div>
         </div>
     </div>
 
+</div>
     <Style>
         .modal-box-report {
             width: 100%;

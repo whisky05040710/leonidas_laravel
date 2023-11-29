@@ -6,6 +6,8 @@ use App\Models\Menu;
 use App\Models\MenuCategory;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -24,8 +26,24 @@ class MenuController extends Controller
     }
     public function menuCategory()
     {
-        $menuCategories = MenuCategory::all();
-        return view('admin.menuCategory', compact('menuCategories'));
+        $categories = MenuCategory::select([
+            'menu_category.*',
+            DB::raw('(SELECT COUNT(*) FROM menus WHERE menus.menu_category_id = menu_category.id) AS reference_count')
+          ])
+            ->with('menus')
+            ->get();
+        return view('admin.menuCategory', compact('categories'));
+    }
+
+    public function addMenuCategory(Request $request)
+    {
+      $validated = $request->validate([
+        'name' => 'required|unique:menu_category'
+      ]);
+      MenuCategory::create([
+        'name' => $validated['name']
+      ]);
+      return redirect('/menu/menuCategory');
     }
 
     /**
@@ -62,6 +80,8 @@ class MenuController extends Controller
         alert()->success('success','Menu has been added');
         return back();
     }
+
+    
 
     /**
      * Display the specified resource.

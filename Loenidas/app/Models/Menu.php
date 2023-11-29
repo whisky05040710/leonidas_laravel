@@ -10,15 +10,15 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        "menu_categories_id",
         'menuName',
         'price',
         'menuStatus',
-        'image'
+        'image',
+        "menu_category_id"
     ];
 
-    public function menu_categories()
+    public function menuCategory()
     {
-        return $this->belongsTo(MenuCategory::class);
+        return $this->belongsTo(MenuCategory::class, 'menu_category_id');
     }
 }
