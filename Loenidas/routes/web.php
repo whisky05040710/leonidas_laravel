@@ -26,14 +26,16 @@ Route::controller(InventoryController::class)->group(function () {
   Route::get('/inventory/inventoryCategory', 'inventoryCategory')->name('inventory.inventoryCategory');
   Route::get('/inventory/inventoryRestocking', 'inventoryRestocking')->name('inventory.inventoryRestocking');
   Route::get('/inventory/inventoryRestockingHistory', 'inventoryRestockingHistory')->name('inventory.inventoryRestockingHistory');
+
+  Route::post('/inventory/inventoryCategory', 'addInventoryCategory');
 });
 
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');;
 Route::controller(MenuController::class)->group(function () {
   Route::get('/menu/menuCategory', 'menuCategory')->name('menu.menuCategory');
-//   Route::get('/inventory/inventoryRestocking', 'inventoryRestocking')->name('inventory.inventoryRestocking');
-//   Route::get('/inventory/inventoryRestockingHistory', 'inventoryRestockingHistory')->name('inventory.inventoryRestockingHistory');
+  //   Route::get('/inventory/inventoryRestocking', 'inventoryRestocking')->name('inventory.inventoryRestocking');
+  //   Route::get('/inventory/inventoryRestockingHistory', 'inventoryRestockingHistory')->name('inventory.inventoryRestockingHistory');
 });
 // Declare other routes before the resource routes.
 

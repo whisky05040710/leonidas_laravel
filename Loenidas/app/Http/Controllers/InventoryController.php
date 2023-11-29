@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Http\Requests\StoreInventoryRequest;
 use App\Http\Requests\UpdateInventoryRequest;
+use App\Models\InventoryCategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
@@ -18,13 +21,32 @@ class InventoryController extends Controller
 
   private function inventoryStatus()
   {
-    $inventories = Inventory::all();
-    return view("admin.inventoryStatus", compact("inventories"));
+    $inventories = Inventory::with('inventoryCategory')->get();
+    $categories = InventoryCategory::all();
+    return view("admin.inventoryStatus", compact("inventories", "categories"));
   }
 
   public function inventoryCategory()
   {
-    return view('admin.inventoryCategory');
+
+    $categories = InventoryCategory::select([
+      'inventory_category.*',
+      DB::raw('(SELECT COUNT(*) FROM inventories WHERE inventories.inventory_category_id = inventory_category.id) AS reference_count')
+    ])
+      ->with('inventories')
+      ->get();
+    return view('admin.inventoryCategory', compact('categories'));
+  }
+
+  public function addInventoryCategory(Request $request)
+  {
+    $validated = $request->validate([
+      'name' => 'required|unique:inventory_category'
+    ]);
+    InventoryCategory::create([
+      'name' => $validated['name']
+    ]);
+    return redirect('/inventory/inventoryCategory');
   }
 
   public function inventoryRestocking()

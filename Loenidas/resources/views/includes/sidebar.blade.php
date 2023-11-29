@@ -18,7 +18,7 @@
           </a>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+          <a id="MenuControllerTab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
               alt="img" /><span>Menu</span>
             <span class="menu-arrow"></span></a>
           <ul>

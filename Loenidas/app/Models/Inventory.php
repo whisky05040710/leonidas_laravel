@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inventory extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        "stockName",
-        "category",
-        "quantity",
-        "unit",
-        "unitCost",
-        "reorderPoint"
-        ];
+  protected $fillable = [
+    "stockName",
+    "quantity",
+    "unit",
+    "unitCost",
+    "reorderPoint",
+    "inventory_category_id"
+  ];
+
+  public function inventoryCategory()
+  {
+    return $this->belongsTo(InventoryCategory::class, 'inventory_category_id');
+  }
 }
