@@ -13,7 +13,7 @@ return new class extends Migration
   {
     //
     Schema::table('inventories', function (Blueprint $table) {
-      $table->removeColumn('category');
+      $table->dropColumn('category');
     });
   }
 
