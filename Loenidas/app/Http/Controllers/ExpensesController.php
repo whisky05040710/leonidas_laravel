@@ -13,14 +13,34 @@ class ExpensesController extends Controller
      */
     public function index()
     {
+
+        return $this->expenses();
+    }
+
+    private function expenses()
+    {
         $monthlyExpenses = Expenses::selectRaw('CONCAT(month, " ", year) AS monthYear, SUM(amount) AS totalAmount')
-                               ->groupBy('monthYear')
-                               ->pluck('totalAmount', 'monthYear');
+        ->groupBy('monthYear')
+        ->pluck('totalAmount', 'monthYear');
 
         $expenses = Expenses::all(); 
         return view('admin.expenses', compact('expenses', 'monthlyExpenses'));
     }
 
+    public function expensesDetails($year, $month)
+    {
+        // Construct the date format expected by the database (e.g., February 2023)
+        $yearMonth = ucfirst($month) . ' ' . $year;
+    
+        // Fetch expenses for the specified year and month
+        $expensesDetails = Expenses::where('year', $year)
+            ->where('month', ucfirst($month)) // Adjust the month format if needed
+            ->get();
+    
+        return view('admin.expensesDetails', compact('expensesDetails'));
+    }
+    
+    
     /**
      * Show the form for creating a new resource.
      */

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ExpensesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,15 +32,23 @@ Route::controller(InventoryController::class)->group(function () {
 });
 
 
-Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');;
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::controller(MenuController::class)->group(function () {
   Route::get('/menu/menuCategory', 'menuCategory')->name('menu.menuCategory');
-  //   Route::get('/inventory/inventoryRestocking', 'inventoryRestocking')->name('inventory.inventoryRestocking');
-  //   Route::get('/inventory/inventoryRestockingHistory', 'inventoryRestockingHistory')->name('inventory.inventoryRestockingHistory');
 
   Route::post('/menu/menuCategory', 'addMenuCategory');
 });
 // Declare other routes before the resource routes.
+
+Route::get('/expe', [ExpensesController::class, 'expe']);
+Route::get('/expenses', [ExpensesController::class, 'index'])->name('expenses.index');
+Route::controller(ExpensesController::class)->group(function () {
+  Route::get('/expenses/{year}/{month}', 'expensesDetails')->name('expenses.details');
+
+  Route::post('/expenses', 'addExpenses');
+});
+
+// Route::resource('/expenses', 'App\Http\Controllers\ExpensesController');
 
 route::resource('/staffs', 'App\Http\Controllers\StaffUserController');
 route::resource('/inventory', 'App\Http\Controllers\InventoryController');
@@ -47,7 +56,7 @@ route::resource('/inventory', 'App\Http\Controllers\InventoryController');
 // route::resource('/menuCategory', 'App\Http\Controllers\MenuCategoryController');
 route::resource('/pos', 'App\Http\Controllers\PosController');
 route::resource('/branch', 'App\Http\Controllers\BranchController');
-route::resource('/expenses', 'App\Http\Controllers\ExpensesController');
+
 
 
 route::controller(AuthController::class)->group(function () {
