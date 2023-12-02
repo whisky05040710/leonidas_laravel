@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Expenses;
 use App\Http\Requests\StoreExpensesRequest;
 use App\Http\Requests\UpdateExpensesRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExpensesController extends Controller
 {
@@ -26,15 +28,39 @@ class ExpensesController extends Controller
         $expenses = Expenses::all(); 
         return view('admin.expenses', compact('expenses', 'monthlyExpenses'));
     }
+    public function addExpensesForm()
+{
+    return view('admin.expensesAdd');
+}
+
+    public function addExpenses(Request $request)
+    {
+      $validated = $request->validate([
+        'expensesName' => 'required|unique:expenses',
+        'month' => 'required|string',
+        'year' => 'required|integer',
+        'amount' => 'required|integer',
+        'image' => 'required|image'
+        
+      ]);
+
+      $imagePath = $request->file('image')->store('expenses_images', 'public');
+      Expenses::create([
+        'expensesName' => $validated['expensesName'],
+        'month' => $validated['month'],
+        'year' => $validated['year'],
+        'amount' => $validated['amount'],
+        'image' => $imagePath
+      ]);
+      return redirect('/expenses');
+    }
 
     public function expensesDetails($year, $month)
     {
-        // Construct the date format expected by the database (e.g., February 2023)
         $yearMonth = ucfirst($month) . ' ' . $year;
     
-        // Fetch expenses for the specified year and month
         $expensesDetails = Expenses::where('year', $year)
-            ->where('month', ucfirst($month)) // Adjust the month format if needed
+            ->where('month', ucfirst($month)) 
             ->get();
     
         return view('admin.expensesDetails', compact('expensesDetails'));
@@ -46,7 +72,6 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        return view('admin.expensesAdd');
     }
 
     /**
@@ -54,22 +79,7 @@ class ExpensesController extends Controller
      */
     public function store(StoreExpensesRequest $request)
     {
-        $validatedData = $request->validated();
 
-        $imagePath = $request->file('image')->store('expenses_images', 'public');
-        $Expenses = new Expenses();
-        $Expenses->fill([
-            'expensesName' => $validatedData['expensesName'],
-            'month' => $validatedData['month'],
-            'year' => $validatedData['year'],
-            'amount' => $validatedData['amount'],
-            'image' => $imagePath,
-
-        ]);
-
-        $Expenses->save();
-        alert()->success('success','New Expenses has been added');
-        return back();
     }
 
     /**

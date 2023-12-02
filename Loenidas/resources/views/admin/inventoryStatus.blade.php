@@ -17,11 +17,11 @@
         <h6>Current Stocks in the Inventory (<a class="card-title"><span id="current-date"></span></a>)</h6>
       </div>
       <div class="page-btn">
-        <a class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addrecipe"><img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Add Inventory</a>
+        <a class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addinventory"><img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Add Inventory</a>
       </div>
     </div>
 
-    <div class="modal fade" id="addrecipe" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="addinventory" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">

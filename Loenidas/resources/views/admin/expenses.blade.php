@@ -8,8 +8,8 @@
                     <h6>Manage your Expenses</h6>
                 </div>
                 <div class="page-btn">
-                  {{-- <a href="{{ route('expenses.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                          class="me-1">Add New Expenses</a> --}}
+                  <a href="{{ route('expenses.form') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                          class="me-1">Add New Expenses</a>
               </div>
             </div>
 
@@ -31,24 +31,20 @@
                                     <th>Action</th>
                             </thead>
                             <tbody>
-                                {{-- <a href="{{ route('expenses.create') }}"> --}}
                                 @foreach($monthlyExpenses as $monthYear => $totalAmount)
                                 <tr>
                                     <td>{{ $monthYear }}</a></td>
                                     <td>{{ number_format($totalAmount, 2) }}</td>
                                     <td>
                                         <a class="me-3" href="{{ route('expenses.details', [
-                                            strtolower(explode(' ', $monthYear)[1]), // year
-                                            strtolower(explode(' ', $monthYear)[0]) // month in lowercase
+                                            strtolower(explode(' ', $monthYear)[1]),
+                                            strtolower(explode(' ', $monthYear)[0])
                                         ]) }}">
                                             <img src="assets/img/icons/eye.svg" alt="img">
                                         </a>
                                     </td>
-                                    
-                                    
                                 </tr>
                                 @endforeach
-                                {{-- </a> --}}
                             </tbody>
                         </table>
                     </div>

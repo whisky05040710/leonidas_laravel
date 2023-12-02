@@ -7,6 +7,9 @@
           <h4>Inventory Restocking Cart</h4>
           <h6>Restock you Inventory here</h6>
         </div>
+        <div class="page-btn">
+          <a class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addInventory"><img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Add Inventory</a>
+        </div>
       </div>
 
       <div class="card">
@@ -143,6 +146,77 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="addInventory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Inventory </h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('inventory.store') }}" method="post">
+            @csrf
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Stock Name<span class="manitory">*</span></label>
+                  <input type="text" name="stockName">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="category">Category<span class="manitory">*</span></label>
+                  <select name="inventory_category_id" id="category" class="form-control select" required>
+                    <option value="" selected disabled>Select</option>
+                    {{-- @foreach ($categories as $category) --}}
+                    {{-- <option value="{{ $category->id }}">{{ $category->name }}</option> --}}
+                    {{-- @endforeach --}}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Quantity<span class="manitory">*</span></label>
+                  <input type="text" name="quantity" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="unit">Unit<span class="manitory">*</span></label>
+                  <select name="unit" id="unit" class="form-control select">
+                    <option value="">Select</option>
+                    <option value="Kilogram">Kilogram</option>
+                    <option value="Gram">Gram</option>
+                    <option value="Pieces">Pieces</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Unit Cost<span class="manitory">*</span></label>
+                  <input type="text" name="unitCost" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Reorder Point<span class="manitory">*</span></label>
+                  <input type="text" name="reorderPoint" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-submit">Confirm</button>
+          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" id="Recommendation" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -218,4 +292,5 @@
       </div>
     </div>
   </div>
+
 @endsection

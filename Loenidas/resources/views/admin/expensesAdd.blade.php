@@ -7,12 +7,10 @@
                         <h4>Add New Expenses</h4>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{ route('expenses.store') }}" enctype="multipart/form-data">
                             @csrf
-
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -77,5 +75,4 @@
             </div>
         </div>
     </div>
-
 @endsection

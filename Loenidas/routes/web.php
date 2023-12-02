@@ -38,14 +38,13 @@ Route::controller(MenuController::class)->group(function () {
 
   Route::post('/menu/menuCategory', 'addMenuCategory');
 });
-// Declare other routes before the resource routes.
 
-Route::get('/expe', [ExpensesController::class, 'expe']);
 Route::get('/expenses', [ExpensesController::class, 'index'])->name('expenses.index');
 Route::controller(ExpensesController::class)->group(function () {
   Route::get('/expenses/{year}/{month}', 'expensesDetails')->name('expenses.details');
+  Route::get('/expenses/addExpenses', 'addExpensesForm')->name('expenses.form');
 
-  Route::post('/expenses', 'addExpenses');
+  Route::post('/expenses/addExpenses', 'addExpenses')->name('expenses.store');
 });
 
 // Route::resource('/expenses', 'App\Http\Controllers\ExpensesController');
@@ -56,7 +55,6 @@ route::resource('/inventory', 'App\Http\Controllers\InventoryController');
 // route::resource('/menuCategory', 'App\Http\Controllers\MenuCategoryController');
 route::resource('/pos', 'App\Http\Controllers\PosController');
 route::resource('/branch', 'App\Http\Controllers\BranchController');
-
 
 
 route::controller(AuthController::class)->group(function () {

@@ -16,15 +16,15 @@
               <div class="search-set">
                 <div class="search-path">
                   <a class="btn btn-filter" id="filter_search">
-                    <img src="assets/img/icons/filter.svg" alt="img" />
+                    <img src="{{ asset('assets/img/icons/filter.svg') }}" alt="img" />
                     <span
-                      ><img src="assets/img/icons/closes.svg" alt="img"
+                      ><img src="{{ asset('assets/img/icons/closes.svg') }}" alt="img"
                     /></span>
                   </a>
                 </div>
                 <div class="search-input">
                   <a class="btn btn-searchset"
-                    ><img src="assets/img/icons/search-white.svg" alt="img"
+                    ><img src="{{ asset('assets/img/icons/search-white.svg') }}" alt="img"
                   /></a>
                 </div>
               </div>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                       <a class="btn btn-filters ms-auto"
                         ><img
-                          src="assets/img/icons/search-whites.svg"
+                          src="{{ asset('assets/img/icons/search-whites.svg') }}"
                           alt="img"
                       /></a>
                     </div>
@@ -77,13 +77,13 @@
                     <td>{{ $expenses->amount }}</td>
                     <td>
                       <a class="me-3" data-bs-toggle="modal" data-bs-target="#viewImage">
-                        <img src="assets/img/icons/eye.svg" alt="img" />
+                        <img src="{{ asset('assets/img/icons/eye.svg ') }}" alt="img" />
                       </a>
                       <a class="me-3" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editExpenses">
-                        <img src="assets/img/icons/edit.svg" alt="img" />
+                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img" />
                       </a>
                       <a class="confirm-text" href="javascript:void(0);">
-                        <img src="assets/img/icons/delete.svg" alt="img">
+                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                         </a>
                     </td>
                   </tr>
@@ -107,7 +107,7 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <img src="assets/img/img-02.jpg" alt="Image">
+              <img src="{{ asset('assets/img/img-02.jpg') }}" alt="Image">
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@
                   <div class="image-upload image-upload-new">
                   <input type="file">
                   <div class="image-uploads">
-                  <img src="assets/img/icons/upload.svg" alt="img">
+                  <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                   <h4>Drag and drop a file to upload</h4>
                   </div>
                   </div>
