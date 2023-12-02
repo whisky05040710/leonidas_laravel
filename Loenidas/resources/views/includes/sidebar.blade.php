@@ -70,7 +70,7 @@
               alt="img" /><span>Expenses</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="expenses.html">Expenses List</a></li>
+            <li><a id="E-index" href="{{ route('expenses.index') }}">Expenses List</a></li>
           </ul>
         </li>
 
