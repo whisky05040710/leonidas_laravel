@@ -123,6 +123,7 @@
                                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <script>
                                         $(document).ready(function() {
+                                          var cartItems = [];
 
                                             // Function to calculate total quantity
                                             function calculateTotalQuantity() {
@@ -279,6 +280,13 @@
                                                 } else {
                                                     var quantity = 1;
 
+                                                    cartItems.push({
+                                                      menuId: menuId,
+                                                      quantity: quantity,
+                                                      menuPrice: itemPrice,
+                                                      totalPrice: itemPrice 
+                                                    });
+
                                                     var cartItemHTML = '<ul class="product-lists" data-menu-id="' + menuId + '">' +
                                                         '<li>' +
                                                         '<div class="productimg">' +
@@ -334,6 +342,11 @@
                                                     var pricePerItem = parseFloat($cartItem.find('.productlinkset h5')
                                                         .text()); // Update this line to fetch the price
                                                     var totalPrice = quantity * pricePerItem;
+                                                    var menuId = parseInt($cartItem.attr('data-menu-id'));
+                                                    var item = cartItems.find(item => item.menuId === menuId);
+                                                    item.quantity = quantity;
+                                                    item.menuPrice = pricePerItem;
+                                                    item.totalPrice = totalPrice;
 
                                                     $cartItem.find('.total-price').text(totalPrice);
                                                 }
@@ -381,7 +394,8 @@
                                                     totalAfterDiscount: totalAfterDiscount,
                                                     serviceCharge: serviceCharge,
                                                     vat: vat,
-                                                    totalBill: totalBill
+                                                    totalBill: totalBill,
+                                                    orderItems: cartItems
                                                     // Add other necessary fields here
                                                 };
 
