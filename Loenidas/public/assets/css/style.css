@@ -5387,7 +5387,7 @@ td a:hover {
 
 .productimgname a {
 	color: #212b36;
-	font-weight: 500
+	font-weight: 500;
 }
 
 .form-group .calc-no {
@@ -8118,8 +8118,8 @@ td a:hover {
 }
 
 .btn-adds {
-	border: 2px solid #28c76f;
-	color: #28c76f;
+	border: 2px solid #1a54c7;
+	color: #1a54c7;
 	width: 100%;
 	padding: 10px;
 	border-radius: 5px;
@@ -8128,7 +8128,7 @@ td a:hover {
 }
 
 .btn-adds:hover {
-	background: #28c76f;
+	background: #1a54c7;
 	color: #fff
 }
 

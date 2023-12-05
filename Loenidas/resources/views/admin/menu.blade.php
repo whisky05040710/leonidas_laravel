@@ -8,7 +8,7 @@
                     <h6>Manage your Menu</h6>
                 </div>
                 <div class="page-btn">
-                    <a class="btn btn-added">
+                    <a class="btn btn-added" href="{{ route('menu.form') }}">
                         <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Add Menu
                     </a>
                 </div>
@@ -29,7 +29,6 @@
                                         alt="img"></a>
                             </div>
                         </div>
-
 
                     </div>
                     <div class="card" id="filter_inputs">
@@ -83,8 +82,14 @@
                             <tbody>
                                 @foreach ($menus as $menu)
                                     <tr>
-                                        <td>{{ $menu->menuName }}</td>
-                                        <td>{{ $menu->menu_categories->menuCategoryName }}</td>
+                                        <td class="productimgname" style="text-align: center; ">
+                                            <div style="margin: 0 auto; display: inline-block;">
+                                            <a href="javascript:void(0);" class="product-img">
+                                                <img src="{{ asset('storage/' . $menu->image) }}" alt="product">
+                                            </a> {{ $menu->menuName }}
+                                            </div>
+                                        </td>
+                                        <td>{{ $menu->menuCategory->name }}</td>
                                         <td>{{ $menu->price }}</td>
                                         <td>
                                             @if ($menu->menuStatus == 'Available')
@@ -94,9 +99,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- <a class="me-3" href="{{ route('menu.show', $menu->id) }}">
+                                            <a class="me-3" href="{{ route('menu.details', $menu->id) }}">
                                                 <img src="assets/img/icons/eye.svg" alt="img">
-                                            </a> --}}
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

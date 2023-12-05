@@ -86,10 +86,11 @@
           </div>
 
           <div class="table-responsive">
+            {{-- <form id="restockForm" action="{{ route('restock.inventory') }}" method="POST">
+              @csrf --}}
             <table class="table  datanew">
               <thead>
                 <tr>
-
                   <th>Stock Name</th>
                   <th>Category</th>
                   <th>Quantity</th>
@@ -100,52 +101,74 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($restocks as $restock)
                 <tr>
 
-                  <td>Chicken</td>
-                  <td>Meats</td>
-                  <td>5</td>
-                  <td>kilogram(kg)</td>
-                  <td>170.00</td>
-                  <td>1</td>
-                  <td>
+                    <td>{{ $restock->stockName }}</td>
+                    <td>{{ $restock->inventoryCategory->name }}</td>
+                    <td>{{ $restock->quantity }}</td>
+                    <td>{{ $restock->unit }}</td>
+                    <td>{{ $restock->unitCost }}</td>
+                    <td>{{ $restock->reorderPoint }}</td>
+                    <td>
 
-                    <a class="me-3" href="inventoryRestockCartEdit.html">
-                      <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                    </a>
-                    <a class="me-3 confirm-text" href="javascript:void(0);">
-                      <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                    </a>
-                  </td>
+                        <a class="me-3" href="inventoryRestockCartEdit.html">
+                            <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
+                        </a>
+                        <a class="me-3 confirm-text" href="javascript:void(0);">
+                            <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                        </a>
+                    </td>
                 </tr>
-                <td>Pork</td>
-                <td>Meats</td>
-                <td>7</td>
-                <td>kilogram(kg)</td>
-                <td>270.00</td>
-                <td>1</td>
-                <td>
-
-                  <a class="me-3" href="inventoryRestockCartEdit.html">
-                    <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                  </a>
-                  <a class="me-3 confirm-text" href="javascript:void(0);">
-                    <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                  </a>
-                </td>
-                </tr>
-
+            @endforeach
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
       <div style="text-align: right;">
-        <a href="javascript:void(0);" class="btn btn-submit">Restock</a>
+        <button type="submit" id="restockButton" class="btn btn-submit" >Restock</button>
       </div>
+    {{-- </form> --}}
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        // Handle click event on the "Restock" button
+        $('#restockButton').click(function() {
+            // Iterate through each table row
+            $('table tbody tr').each(function() {
+                // Extract relevant data from the current row
+                var stockName = $(this).find('td:eq(0)').text();
+                var quantity = $(this).find('td:eq(2)').text();
+
+                // Make an AJAX request to update the inventory
+                $.ajax({
+                    url: '/updateInventory',  // Replace with the actual endpoint to handle the update
+                    method: 'POST',
+                    headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+                    data: {
+                        stockName: stockName,
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        // Handle the success response if needed
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        // Handle the error if needed
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    });
+</script>
 
   <div class="modal fade" id="addInventory" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -157,7 +180,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('inventory.store') }}" method="post">
+          <form action="{{ route('restock_store') }}" method="post">
             @csrf
             <div class="row">
               <div class="col-12">
@@ -171,9 +194,9 @@
                   <label for="category">Category<span class="manitory">*</span></label>
                   <select name="inventory_category_id" id="category" class="form-control select" required>
                     <option value="" selected disabled>Select</option>
-                    {{-- @foreach ($categories as $category) --}}
-                    {{-- <option value="{{ $category->id }}">{{ $category->name }}</option> --}}
-                    {{-- @endforeach --}}
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

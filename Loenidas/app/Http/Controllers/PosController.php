@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Menu;
+use App\Models\MenuCategory;
+use App\Models\Orders;
 
 class PosController extends Controller
 {
@@ -11,7 +14,9 @@ class PosController extends Controller
      */
     public function index()
     {
-        return view('admin.Pos');
+        $menus = Menu::all();
+        $categories = MenuCategory::all();
+        return view('admin.Pos', compact ('menus','categories'));
     }
 
     /**
@@ -27,7 +32,33 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subtotal = $request->input('subtotal');
+        $discountType = $request->input('discountType');
+        $discountAmount = $request->input('discountAmount');
+        $totalAfterDiscount = $request->input('totalAfterDiscount');
+        $serviceCharge = $request->input('serviceCharge');
+        $vat = $request->input('vat');
+        $totalBill = $request->input('totalBill');
+        // You may need to retrieve other form fields as well
+
+        // Store the order in the database
+        $order = new Orders();
+        $order->status = 'Order Paid'; 
+        $order->discount_type = $discountType;
+        $order->discount_amount = $discountAmount; 
+        $order->totalAfterDiscount = $totalAfterDiscount;
+        $order->serviceCharge = $serviceCharge;
+        $order->vat = $vat;
+        $order->totalBill = $totalBill;
+        // Set other necessary fields
+
+        // Save the order
+        $order->save();
+
+        // Return a response (optional)
+        return response()->json(['message' => 'Order stored successfully'], 200);
+
+        return redirect()->route('pos.index');
     }
 
     /**

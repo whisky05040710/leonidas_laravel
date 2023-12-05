@@ -23,15 +23,15 @@
                                 <div class="card flex-fill bg-white">
                                     <div class="card-header d-flex align-items-center justify-content-center"
                                         style="border: 1px solid black; background-color:#4dcc4b; ">
-                                        <h4 class="card-title mb-0">{{ $category->name }}</h4>
+                                        <h4 class="card-title mb-0">{{ $category->name }} - {{ $category->reference_count }}</h4>
                                     </div>
                                     <div class="card-body d-flex align-items-center justify-content-center"
-                                        style="border: 1px solid black;">
-                                        <h1 class="card-text mb-0">{{ $category->reference_count }}</h1>
+                                        style="border: 1px solid black;" >
+                                        <img class="image custom-image" src="{{ asset('storage/' . $category->image) }}" alt="img" />
                                     </div>
                                 </div>
                             </div>
-                            
+                    
                             <div class="modal fade" id="menucategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -96,8 +96,7 @@
             </div>
         </div>
 
-
-    <div class="modal fade" id="menucategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
+    {{-- <div class="modal fade" id="menucategory-{{ $category->id }}" tabindex="-1" aria-labelledby="menuTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #EDEDED; text-align: center;">
@@ -153,7 +152,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <script>
         // Function to toggle between Edit and Save modes
@@ -195,7 +194,7 @@
                     </button>
                 </div>
                 <div class="modal-body" style="background-color: #EDEDED;">
-                    <form action="/menu/menuCategory" method="post">
+                    <form action="/menu/menuCategory" method="post" enctype="multipart/form-data">
                         @csrf
                     <div class="row">
                         <div class="col-12">
@@ -204,6 +203,20 @@
 
                                     <input type="text" class="form-control" id="categoryInput"
                                         placeholder="Enter Category Name" name="name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="categoryImage">Category Image</label>
+                                <div class="image-upload image-upload-new">
+                                    <input type="file" name="image" id="upload-input" class="form-control"
+                                        accept=".jpg, .jpeg, .png">
+                                    <div class="image-uploads">
+                                        <img id="uploaded-image" src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                        <h4>Drag and drop a file to upload</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -220,6 +233,7 @@
     </div>
 
 </div>
+
     <Style>
         .modal-box-report {
             width: 100%;
@@ -233,5 +247,12 @@
             padding: 10px;
             margin-top: 20px;
         }
+        .custom-image{
+            width: 300px; 
+            height: 200px; 
+            object-fit: cover;
+        }
     </Style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @endsection

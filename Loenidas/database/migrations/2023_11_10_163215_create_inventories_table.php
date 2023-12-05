@@ -19,8 +19,11 @@ return new class extends Migration
             $table->enum('unit', ['Kilogram', 'Gram', 'Pieces']);
             $table->integer('unitCost');
             $table->integer('reorderPoint');
-            $table->enum('status', ['Cart', 'Inventory'])->default('Cart');
+            $table->enum('status', ['Cart', 'Inventory'])->default('Inventory');
             $table->timestamps();
+
+            $table->unsignedBigInteger('inventory_category_id');
+            $table->foreign('inventory_category_id')->references('id')->on('inventory_category')->onDelete('cascade');
         });
     }
 

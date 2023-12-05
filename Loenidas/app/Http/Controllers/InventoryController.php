@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\Restock;
 use App\Http\Requests\StoreInventoryRequest;
 use App\Http\Requests\UpdateInventoryRequest;
 use App\Models\InventoryCategory;
@@ -21,7 +22,10 @@ class InventoryController extends Controller
 
   private function inventoryStatus()
   {
-    $inventories = Inventory::with('inventoryCategory')->get();
+    $inventories = Inventory::with('inventoryCategory')
+                    ->where('status', 'Inventory')
+                    ->get();
+
     $categories = InventoryCategory::all();
     return view("admin.inventoryStatus", compact("inventories", "categories"));
   }
@@ -51,12 +55,48 @@ class InventoryController extends Controller
 
   public function inventoryRestocking()
   {
-    return view('admin.inventoryRestocking');
+        $restocks = Restock::with('inventoryCategory')
+                    ->where('status', 'Cart')
+                    ->get();
+
+    $categories = InventoryCategory::all();
+    return view("admin.inventoryRestocking", compact("restocks", "categories"));
+  }
+
+  public function updateInventory(Request $request)
+  {
+      $stockName = $request->input('stockName');
+      $quantity = $request->input('quantity');
+  
+      // Update the inventory based on the $stockName and $quantity
+      $inventory = Inventory::where('stockName', $stockName)->first();
+      $restock = Restock::where('stockName', $stockName)->first();
+  
+      if ($inventory && $restock) {
+          // Update the inventory quantity
+          $inventory->quantity += $quantity;
+          $inventory->save();
+  
+          // Update the restock status to "Inventory"
+          $restock->status = 'Inventory';
+          $restock->save();
+  
+          return response()->json(['success' => true, 'message' => 'Inventory updated successfully']);
+      }
+  
+      return response()->json(['success' => false, 'message' => 'Inventory or Restock not found']);
   }
 
   public function inventoryRestockingHistory()
   {
-    return view('admin.inventoryRestockingHistory');
+    $histories = Restock::all();
+    return view('admin.inventoryRestockingHistory', compact('histories'));
+  }
+
+  public function inventoryRestockingHistoryList($id)
+  {
+    $histories = Restock::where('id', $id)->get();
+    return view('admin.inventoryRestockingHistoryList', compact('histories'));
   }
 
   /**
@@ -74,6 +114,14 @@ class InventoryController extends Controller
   {
     $validatedData = $request->validated();
     Inventory::create($validatedData);
+
+    return back();
+  }
+
+  public function restock_store(StoreInventoryRequest $request)
+  {
+    $validatedData = $request->validated();
+    Restock::create($validatedData);
 
     return back();
   }

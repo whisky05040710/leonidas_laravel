@@ -66,7 +66,7 @@
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}"
+          <a id="ExpensesControllerTab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/expense1.svg') }}"
               alt="img" /><span>Expenses</span>
             <span class="menu-arrow"></span></a>
           <ul>
@@ -93,12 +93,11 @@
           </ul>
         </li>
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/users1.svg') }}"
+          <a id="{{ $controller }}Tab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/users1.svg') }}"
               alt="img" /><span>Users</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="{{ route('staffs.index') }}">Staff List</a></li>
-            <li><a href="{{ route('staffs.index') }}">Customer List</a></li>
+            <li><a id="S-index" href="{{ route('staffs.index') }}">Staff List</a></li>
           </ul>
         </li>
       </ul>

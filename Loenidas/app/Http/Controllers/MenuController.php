@@ -6,6 +6,8 @@ use App\Models\Menu;
 use App\Models\MenuCategory;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Http\Requests\addmenuRequest;
+use App\Http\Requests\StoreMenuCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +26,47 @@ class MenuController extends Controller
         $menus = Menu::all();
         return view('admin.menu', compact('menus'));
     }
+
+    public function addMenuForm()
+{
+    $categories = MenuCategory::all();
+    return view('admin.menuAdd', compact ('categories'));
+}
+
+public function addMenu(addmenuRequest $request)
+{
+    // dd($request->all());
+    // $validated = $request->validate([
+    //     'menuName' => 'required|string',
+    //     // 'menu_category_id' => 'required|numeric|exists:menu_category,id',
+    //     'menu_category_id' => 'required|integer',
+    //     'price' => 'required|numeric|min:0.01',
+    //     'menuStatus' => 'required|in:Available,Unavailable',
+    //     'image' => 'required|image',
+    //   ]);
+    $validatedData = $request->validated();
+    $imagePath = $validatedData['image']->store('menus_images', 'public');
+
+    // dd($request->all());
+        Menu::create([
+        'menuName' => $validatedData['menuName'],
+        'menu_category_id' => $validatedData['menu_category_id'],
+        'price' => $validatedData['price'],
+        'menuStatus' => $validatedData['menuStatus'],
+        'image' => $imagePath
+        ]);
+    
+      return redirect('/menu');
+}
+
+public function menuDetails($id)
+{
+
+    $menu = Menu::find($id);
+
+    return view('admin.menuDetails', compact('menu'));
+}
+
     public function menuCategory()
     {
         $categories = MenuCategory::select([
@@ -35,13 +78,15 @@ class MenuController extends Controller
         return view('admin.menuCategory', compact('categories'));
     }
 
-    public function addMenuCategory(Request $request)
+    public function addMenuCategory(StoreMenuCategory $request)
     {
-      $validated = $request->validate([
-        'name' => 'required|unique:menu_category'
-      ]);
+
+        $validatedData = $request->validated();
+        $imagePath = $validatedData['image']->store('menu_category_images', 'public');
+
       MenuCategory::create([
-        'name' => $validated['name']
+        'name' => $validatedData['name'],
+        'image' => $imagePath
       ]);
       return redirect('/menu/menuCategory');
     }
@@ -51,8 +96,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $menuCategories = MenuCategory::all();
-        return view('admin.menuAdd', compact ('menuCategories'));
+        // $categories = MenuCategory::all();
+        // return view('admin.menuAdd', compact ('categories'));
     }
 
     /**
@@ -60,28 +105,12 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        $validatedData = $request->validated();
-
-
-        $imagePath = $request->file('image')->store('menu', 'public');
+        // $validatedData = $request->validated();
+        // Menu::create($validatedData);
     
-        $menu = new Menu();
-        $menu->fill([
-            'menuName' => $validatedData['menuName'],
-            'menu_categories_id' => $validatedData['menu_categories_id'],
-            'price' => $validatedData['price'],
-            'menuStatus' => $validatedData['menuStatus'],
-            'image' => $imagePath,
-        ]);
+        // return redirect('/menu');
     
-
-        $menu->save();
-    
-        alert()->success('success','Menu has been added');
-        return back();
     }
-
-    
 
     /**
      * Display the specified resource.

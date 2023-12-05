@@ -74,12 +74,24 @@
                                                     <div class="col-12">
                                                         <div class="form-group text-center">
                                                             <div class="modal-box-report">
-                                                                <ol
-                                                                    style="list-style-type: decimal; text-align: left; font-size: 16px;">
-                                                                    @foreach ($category->inventories as $inventory)
-                                                                        <li>{{ $inventory->stockName }}</li>
-                                                                    @endforeach
-                                                                </ol>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Inventory List</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach ($category->inventories as $inventory)
+                                                                                <tr>
+                                                                                    <td>{{ $inventory->stockName }}</td>
+                                                                                </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -160,7 +172,6 @@
                                             <li>Pork</li>
                                             <li>Lamb</li>
                                             <li>Turkey</li>
-
                                         </ol>
                                     </div>
                                 </div>

@@ -1,727 +1,706 @@
 @extends('layouts.pos')
 @section('content')
-<div class="header">
-  <div class="header-left border-0">
-    <a href="index.html" class="logo">
-      <img src="assets/img/logo.png" alt="" />
-    </a>
-    <a href="index.html" class="logo-small">
-      <img src="assets/img/logo-small.png" alt="" />
-    </a>
-  </div>
-
-  <ul class="nav user-menu">
-    <li class="nav-item dropdown has-arrow flag-nav">
-      <a
-        class="nav-link dropdown-toggle"
-        data-bs-toggle="dropdown"
-        href="javascript:void(0);"
-        role="button"
-      >
-        <img src="assets/img/flags/branch.png" alt="" height="20" />
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a href="javascript:void(0);" class="dropdown-item"> Branch 1</a>
-        <a href="javascript:void(0);" class="dropdown-item"> Branch 2</a>
-      </div>
-    </li>
-
-    <li class="nav-item dropdown">
-      <a
-        href="javascript:void(0);"
-        class="dropdown-toggle nav-link"
-        data-bs-toggle="dropdown"
-      >
-        <img src="assets/img/icons/notification-bing.svg" alt="img" />
-        <span class="badge rounded-pill">4</span>
-      </a>
-      <div class="dropdown-menu notifications">
-        <div class="topnav-dropdown-header">
-          <span class="notification-title">Notifications</span>
-          <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-        </div>
-        <div class="noti-content">
-          <ul class="notification-list">
-            <li class="notification-message">
-              <a href="activities.html">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="assets/img/profiles/avatar-02.jpg" />
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">John Doe</span> added new
-                      task
-                      <span class="noti-title"
-                        >Patient appointment booking</span
-                      >
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">4 mins ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="notification-message">
-              <a href="activities.html">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="assets/img/profiles/avatar-03.jpg" />
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">Tarah Shropshire</span>
-                      changed the task name
-                      <span class="noti-title"
-                        >Appointment booking with payment gateway</span
-                      >
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">6 mins ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="notification-message">
-              <a href="activities.html">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="assets/img/profiles/avatar-06.jpg" />
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">Misty Tison</span> added
-                      <span class="noti-title">Domenic Houston</span> and
-                      <span class="noti-title">Claire Mapes</span> to
-                      project
-                      <span class="noti-title"
-                        >Doctor available module</span
-                      >
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">8 mins ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="notification-message">
-              <a href="activities.html">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="assets/img/profiles/avatar-17.jpg" />
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">Rolland Webber</span>
-                      completed task
-                      <span class="noti-title"
-                        >Patient and Doctor video conferencing</span
-                      >
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">12 mins ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="notification-message">
-              <a href="activities.html">
-                <div class="media d-flex">
-                  <span class="avatar flex-shrink-0">
-                    <img alt="" src="assets/img/profiles/avatar-13.jpg" />
-                  </span>
-                  <div class="media-body flex-grow-1">
-                    <p class="noti-details">
-                      <span class="noti-title">Bernardo Galaviz</span>
-                      added new task
-                      <span class="noti-title">Private chat module</span>
-                    </p>
-                    <p class="noti-time">
-                      <span class="notification-time">2 days ago</span>
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="topnav-dropdown-footer">
-          <a href="activities.html">View all Notifications</a>
-        </div>
-      </div>
-    </li>
-
-    <li class="nav-item dropdown has-arrow main-drop">
-      <a
-        href="javascript:void(0);"
-        class="dropdown-toggle nav-link userset"
-        data-bs-toggle="dropdown"
-      >
-        <span class="user-img"
-          ><img src="assets/img/profiles/avator1.jpg" alt="" />
-          <span class="status online"></span
-        ></span>
-      </a>
-      <div class="dropdown-menu menu-drop-user">
-        <div class="profilename">
-          <div class="profileset">
-            <span class="user-img"
-              ><img src="assets/img/profiles/avator1.jpg" alt="" />
-              <span class="status online"></span
-            ></span>
-            <div class="profilesets">
-              <h6>John Doe</h6>
-              <h5>Admin</h5>
-            </div>
-          </div>
-          <hr class="m-0" />
-          <a class="dropdown-item" href="profile.html">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-user me-2"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            My Profile</a
-          >
-          <a class="dropdown-item" href="generalsettings.html"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-settings me-2"
-            >
-              <circle cx="12" cy="12" r="3"></circle>
-              <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-              ></path></svg
-            >Settings</a
-          >
-          <hr class="m-0" />
-          <a class="dropdown-item logout pb-0" href="signin.html"
-            ><img
-              src="assets/img/icons/log-out.svg"
-              class="me-2"
-              alt="img"
-            />Logout</a
-          >
-        </div>
-      </div>
-    </li>
-  </ul>
-
-  <div class="dropdown mobile-user-menu">
-    <a
-      href="javascript:void(0);"
-      class="nav-link dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-      ><i class="fa fa-ellipsis-v"></i
-    ></a>
-    <div class="dropdown-menu dropdown-menu-right">
-      <a class="dropdown-item" href="profile.html">My Profile</a>
-      <a class="dropdown-item" href="generalsettings.html">Settings</a>
-      <a class="dropdown-item" href="signin.html">Logout</a>
-    </div>
-  </div>
-</div>
-      <div class="page-wrapper ms-0">
+    <div class="page-wrapper ms-0">
         <div class="content">
-          <div class="row">
-            <div class="col-lg-8 col-sm-12 tabs_wrapper">
-              <div class="page-header"></div>
-
-              <div class="search-set">
-                <div class="search-input">
-                  <a class="btn btn-searchset"
-                    ><img src="assets/img/icons/search-white.svg" alt="img"
-                  /></a>
-                  <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                    <label>
-                      <input
-                        type="search"
-                        class="form-control form-control-sm"
-                        placeholder="Search..."
-                        aria-controls="DataTables_Table_0"
-                    /></label>
-                  </div>
-                </div>
-              </div>
-
-              <ul class="tabs owl-carousel owl-theme owl-product border-0">
-                <li class="active" id="fruits">
-                  <div class="product-details">
-                    <img src="assets/img/product/meals.jpg" alt="img" />
-                    <h6>Meals</h6>
-                  </div>
-                </li>
-              </ul>
-              <div class="tabs_container">
-                <div class="tab_content active" data-tab="fruits">
-                  <div class="row">
-
-                    <div class="col-lg-3 col-sm-6 d-flex">
-                      <div class="productset flex-fill">
-                        <div class="productsetimg">
-                          <img
-                            src="assets/img/product/meals-pork-menudo.jpg"
-                            alt="img"
-                            id="imageToAdjust"
-                          />
-                          <h6>Qty: 5.00</h6>
-                          <div class="check-product">
-                            <i class="fa fa-check"></i>
-                          </div>
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 tabs_wrapper">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h4>Point of Sales</h4>
+                            <h6>Manage your Orders Here</h6>
                         </div>
-                        <div class="productsetcontent">
-                          <h5>Meals</h5>
-                          <h4>Pork Menudo</h4>
-                          <h6>150.00</h6>
-                        </div>
-                      </div>
                     </div>
-                    <script>
-                      const imageToAdjust =
-                        document.getElementById("imageToAdjust");
 
-                      const adjustImageOrientation = () => {
-                        const img = new Image();
-                        img.src = imageToAdjust.src;
-
-                        img.onload = function () {
-                          const width = img.width;
-                          const height = img.height;
-
-
-                          if (width > height) {
-
-                            const canvas = document.createElement("canvas");
-                            canvas.width = height;
-                            canvas.height = width;
-                            const ctx = canvas.getContext("2d");
-                            ctx.rotate(Math.PI / 2);
-                            ctx.drawImage(img, 0, -width, height, width);
-
-
-                            imageToAdjust.src = canvas.toDataURL("image/jpeg");
-                          }
-                        };
-                      };
-                      adjustImageOrientation();
-                    </script>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-lg-4 col-sm-12">
-              <div class="card card-order">
-                <div class="card-body">
-                  <h4>Orders List</h4>
-                </div>
-                <div class="split-card"></div>
-                <div class="card-body pt-0">
-                  <div class="totalitem">
-                    <h4>Total orders : 4</h4>
-                    <a href="javascript:void(0);">Clear all</a>
-                  </div>
-                  <div class="product-table">
-                    <ul class="product-lists">
-                      <li>
-                        <div class="productimg">
-                          <div class="productimgs">
-                            <img
-                              src="assets/img/product/product31.jpg"
-                              alt="img"
-                            />
-                          </div>
-                          <div class="productcontet">
-                            <h4>
-                              Strawberry
-                              <a
-                                href="javascript:void(0);"
-                                class="ms-2"
-                                data-bs-toggle="modal"
-                                data-bs-target="#edit"
-                                ><img
-                                  src="assets/img/icons/edit-5.svg"
-                                  alt="img"
-                              /></a>
-                            </h4>
-                            <div class="productlinkset">
-                              <h5>PT001</h5>
+                    <div class="search-set">
+                        <div class="search-input">
+                            <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img" /></a>
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                <label>
+                                    <input type="search" class="form-control form-control-sm" placeholder="Search..."
+                                        aria-controls="DataTables_Table_0" /></label>
                             </div>
-                            <div class="increment-decrement">
-                              <div class="input-groups">
-                                <input
-                                  type="button"
-                                  value="-"
-                                  class="button-minus dec button"
-                                />
-                                <input
-                                  type="text"
-                                  name="child"
-                                  value="0"
-                                  class="quantity-field"
-                                />
-                                <input
-                                  type="button"
-                                  value="+"
-                                  class="button-plus inc button"
-                                />
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </li>
-                      <li>3000.00</li>
-                      <li>
-                        <a class="confirm-text" href="javascript:void(0);"
-                          ><img src="assets/img/icons/delete-2.svg" alt="img"
-                        /></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="split-card"></div>
-                <div class="card-body pt-0 pb-2">
-                  <div class="setvalue">
-                    <ul>
-                      <li>
-                        <h5>Subtotal</h5>
-                        <h6>₱ 555.00</h6>
-                      </li>
-                      <label for="discount-type">Select Discount Type:</label>
-                      <select id="discount-type" name="discount-type">
-                        <option value="none">No Discount</option>
-                        <option value="senior">Senior Discount</option>
-                        <option value="pwd">PWD Discount</option>
-                      </select>
-                      <li>
-                        <h5>10% Discount</h5>
-                        <h6>₱ 50.00</h6>
-                      </li>
-                      <hr />
-                      <li>
-                        <h5></h5>
-                        <h6>₱ 505.00</h6>
-                      </li>
-                      <li>
-                        <h5>10% Service Charge</h5>
-                        <h6>₱ 55.00</h6>
-                      </li>
-                      <li>
-                        <h5>12% VAT</h5>
-                        <h6>₱ 139.00</h6>
-                      </li>
-                      <li class="total-value">
-                        <h5>Total Bill</h5>
-                        <h6>₱ 695.00</h6>
-                      </li>
-                      <br />
-                    </ul>
-                  </div>
-                  <a>
-                    <div class="btn-totallabel">
-                      <h5>Order Paid</h5>
-                      <h6>₱ 695.00</h6>
                     </div>
-                  </a>
-                  <div class="btn-pos">
-                    <ul>
-                      <li>
-                        <a
-                          class="btn"
-                          data-bs-toggle="modal"
-                          data-bs-target="#placedorderlist"
-                          ><img
-                            src="assets/img/icons/transcation.svg"
-                            alt="img"
-                            class="me-1"
-                          />Placed Order List</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          class="btn"
-                          data-bs-toggle="modal"
-                          data-bs-target="#paidorderlist"
-                          ><img
-                            src="assets/img/icons/transcation.svg"
-                            alt="img"
-                            class="me-1"
-                          />
-                          Paid Order List</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          class="btn"
-                          data-bs-toggle="modal"
-                          data-bs-target="#reservationlist"
-                          ><img
-                            src="assets/img/icons/transcation.svg"
-                            alt="img"
-                            class="me-1"
-                          />
-                          Reservation List</a
-                        >
-                      </li>
+                    <ul class="tabs owl-carousel owl-theme owl-product border-0">
+                        @foreach ($categories as $category)
+                            <li class="{{ $loop->first ? 'active' : '' }}" id="{{ $category->id }}">
+                                <div class="product-details">
+                                    <img src="{{ asset('storage/' . $category->image) }}" alt="img" />
+                                    <h6>{{ $category->name }}</h6>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
-                  </div>
+                    <div class="tabs_container">
+                        @foreach ($categories as $category)
+                            <div class="tab_content {{ $loop->first ? 'active' : '' }}" data-tab="{{ $category->id }}">
+                                <div class="row">
+                                    @foreach ($menus as $menu)
+                                        @if ($menu->menu_category_id === $category->id)
+                                            <div class="col-lg-3 col-sm-6 d-flex">
+                                                <div class="productset flex-fi">
+                                                    <div class="productsetimg">
+                                                        <img src="{{ asset('storage/' . $menu->image) }}" alt="img" />
+                                                    </div>
+                                                    <div class="productsetcontent">
+                                                        <h5>{{ $category->name }}</h5>
+                                                        <h4>{{ $menu->menuName }}</h4>
+                                                        <h6>{{ $menu->price }}</h6>
+                                                        <button class="add-to-cart-button"
+                                                            data-menu-id="{{ $menu->id }}"
+                                                            data-image="{{ $menu->image }}"
+                                                            data-name="{{ $menu->menuName }}"
+                                                            data-price="{{ $menu->price }}">Add to Cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    <script>
+                                        const imageToAdjust =
+                                            document.getElementById("imageToAdjust");
+
+                                        const adjustImageOrientation = () => {
+                                            const img = new Image();
+                                            img.src = imageToAdjust.src;
+
+                                            img.onload = function() {
+                                                const width = img.width;
+                                                const height = img.height;
+
+                                                // Check if the image is in landscape orientation
+                                                if (width > height) {
+                                                    // Rotate the image 90 degrees (clockwise)
+                                                    const canvas = document.createElement("canvas");
+                                                    canvas.width = height;
+                                                    canvas.height = width;
+                                                    const ctx = canvas.getContext("2d");
+                                                    ctx.rotate(Math.PI / 2);
+                                                    ctx.drawImage(img, 0, -width, height, width);
+
+                                                    // Update the image source with the adjusted image
+                                                    imageToAdjust.src = canvas.toDataURL("image/jpeg");
+                                                }
+                                            };
+                                        };
+
+                                        // Call the function to adjust image orientation
+                                        adjustImageOrientation();
+                                    </script>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-              </div>
+
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-list">
+                        <div class="orderid">
+                            <h4>Order List</h4>
+                            <h5>Order ID : #65565</h5>
+                            <h5>Customer Name : Francis Joe</h5>
+                        </div>
+                        <div class="actionproducts">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" class="deletebg confirm-text"><img
+                                            src="assets/img/icons/delete-2.svg" alt="img"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form id="orderPaidForm" action="{{ route('pos.store') }}" method="POST">
+                        @csrf
+                        <div class="card card-order">
+                            {{-- tbl --}}
+                            <div class="split-card"></div>
+                            <div class="card-body pt-0">
+                                <div class="totalitem">
+                                    <h4>Total orders : <span id="totalOrders">0</span></h4>
+                                </div>
+                                <div id="cartSection" class="product-table">
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    <script>
+                                        $(document).ready(function() {
+
+                                            // Function to calculate total quantity
+                                            function calculateTotalQuantity() {
+                                                var totalQuantity = 0;
+                                                $('.quantity-field').each(function() {
+                                                    var quantity = parseInt($(this).val());
+                                                    totalQuantity += quantity;
+                                                });
+                                                return totalQuantity;
+                                            }
+
+                                            // Function to update total quantity display
+                                            function updateTotalQuantity() {
+                                                var totalOrders = calculateTotalQuantity();
+                                                $('#totalOrders').text(totalOrders);
+                                            }
+
+                                            // Function to calculate the subtotal
+                                            function calculateSubtotal() {
+                                                var subtotal = 0;
+                                                $('.product-lists').each(function() {
+                                                    var quantity = parseInt($(this).find('.quantity-field').val());
+                                                    var pricePerItem = parseFloat($(this).find('.productlinkset h5').text());
+                                                    var itemSubtotal = quantity * pricePerItem;
+                                                    subtotal += itemSubtotal;
+                                                });
+                                                return subtotal;
+                                            }
+
+                                            // Update the subtotal display
+                                            function updateSubtotal() {
+                                                var subtotal = calculateSubtotal();
+                                                $('#subtotal').text(subtotal.toFixed(2)); // Update the subtotal display
+                                            }
+
+                                            // Function to calculate discount and update display
+                                            function calculateDiscount(subtotal, discountType) {
+                                                var discountAmount = 0;
+                                                var totalAfterDiscount = 0;
+
+                                                switch (discountType) {
+                                                    case "PWD":
+                                                    case "Senior Citizen":
+                                                        discountAmount = subtotal * 0.1; // Assuming 5% discount
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+
+                                                totalAfterDiscount = subtotal - discountAmount;
+
+                                                $('#discountAmount').text(discountAmount.toFixed(2));
+                                                $('#totalAfterDiscount').text(totalAfterDiscount.toFixed(2));
+                                            }
+
+                                            // Function to calculate service charge (assumed 10%)
+                                            function calculateServiceCharge(subtotal) {
+                                                return subtotal * 0.10;
+                                            }
+
+                                            // Function to calculate VAT (assumed 12%)
+                                            function calculateVAT(subtotal) {
+                                                return subtotal * 0.12;
+                                            }
+
+                                            // Function to update Service Charge, VAT, and Total Bill based on calculations
+                                            function updateServiceChargeVATTotalBill(subtotal, discountType) {
+                                                var discount = 0;
+                                                var grandTotal = 0;
+
+                                                // Calculate discount based on discount type
+                                                if (discountType === "PWD" || discountType === "Senior Citizen") {
+                                                    discount = subtotal * 0.1; // Assuming 5% discount
+                                                }
+
+                                                grandTotal = subtotal - discount;
+
+                                                var serviceCharge = calculateServiceCharge(grandTotal);
+                                                var vat = calculateVAT(grandTotal + serviceCharge);
+                                                var totalBill = grandTotal + serviceCharge + vat;
+
+                                                $('#discountAmount').text(discount.toFixed(2));
+                                                $('#totalAfterDiscount').text(grandTotal.toFixed(2));
+                                                $('#serviceCharge').text(serviceCharge.toFixed(2));
+                                                $('#vat').text(vat.toFixed(2));
+                                                $('#totalBill').text(totalBill.toFixed(2));
+                                            }
+
+                                            // Update the calculations when an item is added to the cart or quantity changes
+                                            function updateCalculations() {
+                                                var subtotal = calculateSubtotal();
+                                                var discountType = $('#discountType').val();
+
+                                                updateSubtotal();
+                                                updateTotalQuantity();
+
+                                                if (discountType === "None") {
+                                                    $('#discountAmount').text('₱ 0.00');
+                                                    $('#totalAfterDiscount').text('₱ ' + subtotal.toFixed(2));
+                                                    updateServiceChargeVATTotalBill(subtotal, discountType);
+                                                } else {
+                                                    calculateDiscount(subtotal, discountType);
+                                                }
+                                            }
+
+                                            $(document).ready(function() {
+                                                var initialSubtotal = calculateSubtotal();
+                                                updateServiceChargeVATTotalBill(initialSubtotal);
+                                            });
+
+                                            // Event listener for discount type change
+                                            $('#discountType').on('change', function() {
+                                                var subtotal = calculateSubtotal();
+                                                var selectedDiscountType = $(this).val();
+
+                                                updateSubtotal();
+                                                updateTotalQuantity();
+
+                                                if (selectedDiscountType === "Select Discount Type") {
+                                                    $('#discountAmount').text('0.00');
+                                                    $('#totalAfterDiscount').text(subtotal.toFixed(2));
+                                                } else {
+                                                    calculateDiscount(subtotal, selectedDiscountType);
+                                                }
+
+                                                updateServiceChargeVATTotalBill(subtotal, selectedDiscountType);
+                                            });
+
+                                            // Attach event listeners for + and - buttons
+                                            $(document).on('click', '.button-plus, .button-minus', function() {
+                                                updateTotalQuantity();
+                                                updateSubtotal();
+                                                updateCalculations();
+                                            });
+
+                                            $('.add-to-cart-button').on('click', function() {
+                                                var itemName = $(this).data('name');
+                                                var itemPrice = $(this).data('price');
+                                                var image = $(this).data('image');
+                                                var menuId = $(this).data('menu-id');
+
+                                                console.log("Item Name: ", itemName);
+                                                console.log("Item Price: ", itemPrice);
+                                                console.log("Image: ", image);
+                                                console.log("Menu ID: ", menuId);
+
+                                                // Check if the item is already in the cart
+                                                var $existingCartItem = $('#cartSection').find('[data-menu-id="' + menuId + '"]');
+                                                if ($existingCartItem.length > 0) {
+                                                    var $quantityField = $existingCartItem.find('.quantity-field');
+                                                    var currentQuantity = parseInt($quantityField.val());
+                                                    $quantityField.val(currentQuantity + 1);
+                                                    updateTotalPrice($existingCartItem);
+                                                } else {
+                                                    var quantity = 1;
+
+                                                    var cartItemHTML = '<ul class="product-lists" data-menu-id="' + menuId + '">' +
+                                                        '<li>' +
+                                                        '<div class="productimg">' +
+                                                        '<div class="productimgs">' +
+                                                        '<img src="' + image + '" alt="img" />' +
+                                                        '</div>' +
+                                                        '<div class="productcontet">' +
+                                                        '<h4>' + itemName + '</h4>' +
+                                                        '<div class="productlinkset">' +
+                                                        '<h5>' + itemPrice + '</h5>' +
+                                                        '</div>' +
+                                                        '<div class="increment-decrement">' +
+                                                        '<div class="input-groups">' +
+                                                        '<input type="button" value="-" class="button-minus dec button" />' +
+                                                        '<input type="text" name="child" value="' + quantity +
+                                                        '" class="quantity-field" />' +
+                                                        '<input type="button" value="+" class="button-plus inc button" />' +
+                                                        '</div>' +
+                                                        '</div>' +
+                                                        '</div>' +
+                                                        '</div>' +
+                                                        '</li>' +
+                                                        '<li class="total-price">' + (quantity * itemPrice) + '</li>' +
+                                                        '<li>' +
+                                                        '<a class="confirm-text" href="javascript:void(0);"><img src="assets/img/icons/delete-2.svg" alt="img" /></a>' +
+                                                        '</li>' +
+                                                        '</ul>';
+
+                                                    $('#cartSection').append(cartItemHTML);
+                                                }
+                                                $('.button-plus').on('click', function() {
+                                                    var $quantityField = $(this).siblings('.quantity-field');
+                                                    var currentQuantity = parseInt($quantityField.val());
+                                                    $quantityField.val(currentQuantity + 1);
+
+                                                    updateTotalPrice($(this).closest('.product-lists'));
+                                                });
+
+                                                // Event handler for the decrement button
+                                                $('.button-minus').on('click', function() {
+                                                    var $quantityField = $(this).siblings('.quantity-field');
+                                                    var currentQuantity = parseInt($quantityField.val());
+                                                    if (currentQuantity > 1) {
+                                                        $quantityField.val(currentQuantity - 1);
+                                                    }
+
+                                                    updateTotalPrice($(this).closest('.product-lists'));
+                                                });
+
+                                                // Function to update total price based on quantity
+                                                function updateTotalPrice($cartItem) {
+                                                    var quantity = parseInt($cartItem.find('.quantity-field').val());
+                                                    var pricePerItem = parseFloat($cartItem.find('.productlinkset h5')
+                                                        .text()); // Update this line to fetch the price
+                                                    var totalPrice = quantity * pricePerItem;
+
+                                                    $cartItem.find('.total-price').text(totalPrice);
+                                                }
+                                                updateTotalQuantity();
+                                                updateSubtotal();
+                                                updateCalculations();
+                                            });
+                                            // Function to remove items from the cart
+                                            $(document).on('click', '.confirm-text', function() {
+                                                $(this).closest('.product-lists').remove();
+                                                updateTotalQuantity();
+                                                updateSubtotal();
+                                            });
+
+                                            $(document).ready(function() {
+                                                updateCalculations();
+                                            });
+
+                                            // Event listener for the "Order Paid" button
+                                            $('.btn-adds').on('click', function(e) {
+                                                e.preventDefault(); // Prevent the default form submission
+
+
+                                                // Get other necessary data (subtotal, discountType, etc.)
+                                                var subtotal = parseFloat($('#subtotal').text());
+                                                var discountType = $('#discountType').val();
+                                                var discountAmount = 0; // Default to zero
+                                                if (discountType === "PWD" || discountType ===
+                                                    "Senior Citizen") {
+                                                    // Calculate discount amount here based on selected discount type
+                                                    discountAmount = subtotal * 0.1; // Assuming a 10% discount
+                                                }
+
+                                                var totalAfterDiscount = parseFloat($('#totalAfterDiscount').text());
+                                                var serviceCharge = parseFloat($('#serviceCharge').text());
+                                                var vat = parseFloat($('#vat').text());
+                                                var totalBill = parseFloat($('#totalBill').text());
+
+                                                // Create an object to hold the data
+                                                var orderData = {
+                                                    _token: $('input[name="_token"]').val(), // Include the CSRF token
+                                                    subtotal: subtotal,
+                                                    discountType: discountType,
+                                                    discountAmount: discountAmount,
+                                                    totalAfterDiscount: totalAfterDiscount,
+                                                    serviceCharge: serviceCharge,
+                                                    vat: vat,
+                                                    totalBill: totalBill
+                                                    // Add other necessary fields here
+                                                };
+
+                                                // Send a POST request to your Laravel backend
+                                                $.ajax({
+                                                    url: '{{ route('pos.store') }}',
+                                                    method: 'POST',
+                                                    data: orderData,
+                                                    success: function(response) {
+                                                        // Handle successful response, if needed
+                                                        console.log('Order successfully stored in the database');
+                                                        // Redirect or show a success message
+
+                                                        // Redirect to the desired URL after a successful order
+                                                        window.location.href = '{{ route('pos.index') }}';
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        // Handle errors, if any
+                                                        console.error(error);
+                                                        // Show an error message to the user or retry the request
+                                                    }
+                                                });
+                                            });
+
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="split-card"></div>
+                            <div class="card-body pt-0 pb-2">
+                                <div class="setvalue">
+                                    <ul>
+                                        <li>
+                                            <h5>Subtotal</h5>
+                                            <h6>₱ <span id="subtotal">0</span></h6>
+                                            <input type="hidden" name="subtotal">
+                                        </li>
+                                        <li>
+                                            <div class="col-lg-7">
+                                                <div class="select-split ">
+                                                    <div class="select-group w-100">
+                                                        <select name="discountType" id="discountType" class="select">
+                                                            <option value="None">Select Discount Type</option>
+                                                            <option value="PWD">PWD (10% Discount)</option>
+                                                            <option value="Senior Citizen">Senior Citizen (10% Discount)
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h6>₱ <span id="discountAmount">0</span></h6>
+                                            <input type="hidden" name="discountAmount">
+                                        </li>
+                                        <hr />
+                                        <li>
+                                            <h5></h5>
+                                            <h6>₱ <span id="totalAfterDiscount">0</span></h6>
+                                            <input type="hidden" name="totalAfterDiscount">
+                                        </li>
+                                        <li>
+                                            <h5>10% Service Charge</h5>
+                                            <h6>₱ <span id="serviceCharge">0.00</span></h6>
+                                            <input type="hidden" name="serviceCharge">
+                                        </li>
+                                        <li>
+                                            <h5>12% VAT</h5>
+                                            <h6>₱ <span id="vat">0.00</span></h6>
+                                            <input type="hidden" name="vat">
+                                        </li>
+                                        <li class="total-value">
+                                            <h5>Total Bill</h5>
+                                            <h6>₱ <span id="totalBill">0.00</span></h6>
+                                            <input type="hidden" name="totalBill">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-adds">Order Paid</button>
+                                </div>
+
+                                <div class="btn-pos">
+                                    <ul>
+                                        <li>
+                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#placedorderlist"><img
+                                                    src="assets/img/icons/transcation.svg" alt="img"
+                                                    class="me-1" />Placed Order List</a>
+                                        </li>
+                                        <li>
+                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#reservationlist"><img
+                                                    src="assets/img/icons/transcation.svg" alt="img"
+                                                    class="me-1" />Reservation List
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#paidorderlist"><img
+                                                    src="assets/img/icons/transcation.svg" alt="img"
+                                                    class="me-1" />Paid
+                                                Order List
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
     </div>
 
-    <div class="modal fade" id="placedorderlist" tabindex="-1" aria-hidden="true" >
-      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Placed Order List</h5>
-            <button
-              type="button"
-              class="close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="tab-content">
-              <div class="table-top">
-                <div class="search-set">
-                  <div class="search-input">
-                    <a class="btn btn-searchset"
-                      ><img src="assets/img/icons/search-white.svg" alt="img"
-                    /></a>
-                  </div>
+    <div class="modal fade" id="placedorderlist" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Placed Order List</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                <a href="transactionPlacedOrderList.html">
-                  <div class="wordset yellow-button">View Details</div>
-                </a>
-                <style>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="table-top">
+                            <div class="search-set">
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                            alt="img" /></a>
+                                </div>
+                            </div>
 
-                  .yellow-button {
-                    background-color: #ffde59; 
-                    color: #000; 
-                    padding: 10px 20px; 
-                    border: none; 
-                    border-radius: 5px; 
-                    text-align: center; 
-                    text-decoration: none; 
-                    display: inline-block; 
-                    cursor: pointer; 
-                    transition: background-color 0.3s ease; 
-                  }
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table datanew">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                  .yellow-button:hover {
-                    background-color: #ffce00;
-                  }
-                </style>
-              </div>
-              <div class="table-responsive">
-                <table class="table datanew">
-                  <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Customer Name</th>
-                      <th>Table Number</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                                    <tr>
+                                        <td>2023854</td>
 
-                    <tr>
-                      <td>2022-03-07</td>
+                                        <td>Francis</td>
+                                        <td>
+                                            <a class="me-3" href="javascript:void(0);">
+                                                <img src="assets/img/icons/eye.svg" alt="img" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3475634</td>
 
-                      <td>Walk-in Customer</td>
-                      <td>12</td>
-                      <td>
-                        <a class="me-3" href="javascript:void(0);">
-                          <img src="assets/img/icons/eye.svg" alt="img" />
-                        </a>
-                        <a class="me-3" href="javascript:void(0);">
-                          <img src="assets/img/icons/edit.svg" alt="img" />
-                        </a>
-                        <a class="me-3 confirm-text" href="javascript:void(0);">
-                          <img src="assets/img/icons/delete.svg" alt="img" />
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="paidorderlist" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Paid Order List</h5>
-            <button
-              type="button"
-              class="close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="tab-content">
-              <div class="table-top">
-                <div class="search-set">
-                  <div class="search-input">
-                    <a class="btn btn-searchset"
-                      ><img src="assets/img/icons/search-white.svg" alt="img"
-                    /></a>
-                  </div>
+                                        <td>Joe</td>
+                                        <td>
+                                            <a class="me-3" href="javascript:void(0);">
+                                                <img src="assets/img/icons/eye.svg" alt="img" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <a href="transactionPaidOrderList.html">
-                  <div class="wordset yellow-button">View Details</div>
-                </a>
-              </div>
-              <div class="table-responsive">
-                <table class="table datanew">
-                  <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Customer Name</th>
-                      <th>Table Number</th>
-                      <th>Total Bill</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>2022-03-07</td>
-
-                      <td>Walk-in Customer</td>
-                      <td>12</td>
-                      <td>P 200.00</td>
-                      <td>
-                        <a class="me-3" href="javascript:void(0);">
-                          <img src="assets/img/icons/eye.svg" alt="img" />
-                        </a>
-                        <a class="me-3" href="javascript:void(0);">
-                          <img src="assets/img/icons/edit.svg" alt="img" />
-                        </a>
-                        <a class="me-3 confirm-text" href="javascript:void(0);">
-                          <img src="assets/img/icons/delete.svg" alt="img" />
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <div class="modal fade" id="reservationlist" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Reservation List</h5>
-            <button
-              type="button"
-              class="close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="tab-content">
-              <div
-                class="tab-pane fade show active"
-                id="purchase"
-                role="tabpanel"
-                aria-labelledby="purchase-tab"
-              >
-                <div class="table-top">
-                  <div class="search-set">
-                    <div class="search-input">
-                      <a class="btn btn-searchset"
-                        ><img src="assets/img/icons/search-white.svg" alt="img"
-                      /></a>
-                    </div>
-                  </div>
-                  <a href="transactionReservationList.html">
-                    <div class="wordset yellow-button">View Details</div>
-                  </a>
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reservation List</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                <div class="table-responsive">
-                  <table class="table datanew">
-                    <thead>
-                      <tr>
-                        <th>Reservation ID</th>
-                        <th>Customer Name</th>
-                        <th>Table Number</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>2022-03-07</td>
-                        <td>Walk-in Customer</td>
-                        <td>12</td>
-                        <td>
-                          <a class="me-3" href="javascript:void(0);">
-                            <img src="assets/img/icons/eye.svg" alt="img" />
-                          </a>
-                          <a class="me-3" href="javascript:void(0);">
-                            <img src="assets/img/icons/edit.svg" alt="img" />
-                          </a>
-                          <a
-                            class="me-3 confirm-text"
-                            href="javascript:void(0);"
-                          >
-                            <img src="assets/img/icons/delete.svg" alt="img" />
-                          </a>
-                        </td>
-                      </tr>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="purchase" role="tabpanel"
+                            aria-labelledby="purchase-tab">
+                            <div class="table-top">
+                                <div class="search-set">
+                                    <div class="search-input">
+                                        <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                                alt="img" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table datanew">
+                                    <thead>
+                                        <tr>
+                                            <th>Reservation ID</th>
+                                            <th>Customer Name</th>
+                                            <th>Table Number</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>43645364</td>
 
-                    </tbody>
-                  </table>
+                                            <td>Francis</td>
+                                            <td>12</td>
+                                            <td>
+                                                <a class="me-3" href="javascript:void(0);">
+                                                    <img src="assets/img/icons/eye.svg" alt="img" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4674576</td>
+
+                                            <td>Joe</td>
+                                            <td>12</td>
+                                            <td>
+                                                <a class="me-3" href="javascript:void(0);">
+                                                    <img src="assets/img/icons/eye.svg" alt="img" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
-    @endsection
+    <div class="modal fade" id="paidorderlist" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Paid Order List</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="table-top">
+                            <div class="search-set">
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                            alt="img" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table datanew">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Table Number</th>
+                                        <th>Total Bill</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2022-03-07</td>
+                                        <td>Walk-in Customer</td>
+                                        <td>12</td>
+                                        <td>P 200.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2022-03-07</td>
+                                        <td>Walk-in Customer</td>
+                                        <td>12</td>
+                                        <td>P 200.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        /* Reset standard margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        .productsetcontent {
+            margin: 0;
+        }
+
+        .add-to-cart-button {
+            width: 100%;
+            padding: 10px 0;
+            /* Set top and bottom padding to 10px, remove left and right padding */
+            margin: 0;
+            /* Remove margin */
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+@endsection

@@ -11,9 +11,6 @@
 
       <div class="card">
         <div class="card-body">
-
-
-
           <div class="fc-toolbar fc-header-toolbar">
             <div class="fc-left">
               <div class="fc-button-group">
@@ -36,42 +33,35 @@
 
               </div>
             </div>
-            <div class="fc-center" style="margin-right:10%;">
-              <h2>September 2023</h2>
-            </div>
-            <div class="fc-clear"></div>
-          </div>
-          <br>
+            @php
+            $date = date('F Y');
+            @endphp
+        <div class="fc-center" style="margin-right:10%;">
+            <h2>{{ $date }}</h2>
+        </div>
+        <div class="fc-clear"></div>
+    </div>
+    <br>
 
 
-          <div class="table-responsive">
-            <table class="table ">
-              <thead>
+    <div class="table-responsive">
+        <table class="table ">
+            <thead>
                 <tr>
-
-                  <th>Date</th>
-
+                    <th>Date</th>
                 </tr>
-              </thead>
-              <tbody>
-                <tr onclick="window.location='inventoryrestockingHistoryList.html';">
-                  <td>June 12, 2023</td>
-                </tr>
-                <tr onclick="window.location='inventoryrestockingHistoryList.html';">
-                  <td>June 11, 2023</td>
-                </tr>
-                <tr onclick="window.location='inventoryrestockingHistoryList.html';">
-                  <td>June 10, 2023</td>
-                </tr>
-                <tr onclick="window.location='inventoryrestockingHistoryList.html';">
-                  <td>June 9, 2023</td>
-                </tr>
-                <tr onclick="window.location='inventoryrestockingHistoryList.html';">
-                  <td>June 8, 2023</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            </thead>
+            <tbody>
+                @foreach ($histories as $history)
+                    <tr>
+                        <td><a
+                                href="{{ route('inventory.inventoryRestockingHistoryList', $history->id) }}">{{ $history->updated_at->setTimezone('Asia/Manila')->format('M d, Y h:i A') }}</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
         </div>
       </div>
     </div>

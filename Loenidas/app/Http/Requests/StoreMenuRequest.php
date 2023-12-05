@@ -23,9 +23,10 @@ class StoreMenuRequest extends FormRequest
     {
         return [
             'menuName' => 'required|string',
-            'menu_categories_id' => 'required|numeric|exists:menu_categories,id',
+            // 'menu_category_id' => 'required|numeric|exists:menu_category,id',
+            'menu_category_id' => 'required|integer',
             'price' => 'required|numeric|min:0.01',
-            'menuStatus' => 'required|string',
+            'menuStatus' => 'required|in:Available, Unavailable',
             'image' => 'required|image',
         ];
     }
