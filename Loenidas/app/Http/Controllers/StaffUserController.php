@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\StaffUser;
@@ -15,7 +14,6 @@ class StaffUserController extends Controller
     public function index()
     {
         $staffUsers = StaffUser::with('user')->get();
-
         return view("admin.staffUser", compact("staffUsers"));
     }
 
@@ -54,7 +52,7 @@ class StaffUserController extends Controller
             'profile' => $imagePath,
             ]);
             alert()->success('success','Staff Account have been created');
-            return back();
+            return redirect('/staffs');
     }
 
     /**

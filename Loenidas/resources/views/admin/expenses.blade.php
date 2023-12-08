@@ -12,7 +12,6 @@
                           class="me-1">Add New Expenses</a>
               </div>
             </div>
-
             <div class="card">
                 <div class="card-body">
                     <div class="table-top">
@@ -36,12 +35,13 @@
                                     <td>{{ $monthYear }}</a></td>
                                     <td>{{ number_format($totalAmount, 2) }}</td>
                                     <td>
-                                        <a class="me-3" href="{{ route('expenses.details', [
-                                            strtolower(explode(' ', $monthYear)[1]),
-                                            strtolower(explode(' ', $monthYear)[0])
-                                        ]) }}">
-                                            <img src="assets/img/icons/eye.svg" alt="img">
-                                        </a>
+                                        <form action="{{ route('expenses.details') }}" method="GET">
+                                            <input type="hidden" name="year" value="{{ strtolower(explode(' ', $monthYear)[1]) }}">
+                                            <input type="hidden" name="month" value="{{ strtolower(explode(' ', $monthYear)[0]) }}">
+                                            <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                                                <img src="assets/img/icons/eye.svg" alt="img">
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

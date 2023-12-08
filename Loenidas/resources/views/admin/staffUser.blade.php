@@ -1,5 +1,6 @@
 @extends('layouts.body')
 @section('content')
+
 <div class="page-wrapper">
     <div class="content">
       <div class="page-header">
@@ -36,21 +37,24 @@
           <div class="card" id="filter_inputs">
             <div class="card-body pb-0">
               <div class="row">
-                <div class="col-lg-2 col-sm-6 col-12">
+                <div class="col-lg-3 col-sm-6 col-12">
                   <div class="form-group">
                     <input type="text" placeholder="Enter Name" />
                   </div>
                 </div>
-                <div class="col-lg-2 col-sm-6 col-12">
+                <div class="col-lg-3 col-sm-6 col-12">
                   <div class="form-group">
                     <input type="text" placeholder="Enter Email" />
                   </div>
                 </div>
-                <div class="col-lg-2 col-sm-6 col-12">
+                <div class="col-lg-3 col-sm-6 col-12">
                   <div class="form-group">
                     <select class="select">
                       <option>Role</option>
                       <option>Manager</option>
+                      <option>Chef</option>
+                      <option>Cashier</option>
+                      <option>Waiter</option>
                     </select>
                   </div>
                 </div>
@@ -72,8 +76,8 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Email</th>
                   <th>Role</th>
+                  <th>Email</th>
                   <th>Password</th>
                   <th>Account Status</th>
                   <th>Action</th>
@@ -83,8 +87,8 @@
                 @foreach ($staffUsers as $staffUser)
                 <tr>
                     <td>{{ $staffUser->firstname }}{{ $staffUser->lastname }}</td>
-                    <td>{{ $staffUser->user->email }}</td>
                     <td>{{ $staffUser->role }}</td>
+                    <td>{{ $staffUser->user->email }}</td>
                     <td>{{ $staffUser->user->password }}</td>
                   <td><span class="bg-lightgreen badges">Active</span></td>
                   <td>

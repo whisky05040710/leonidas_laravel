@@ -62,7 +62,14 @@
             <span class="menu-arrow"></span></a>
           <ul>
             <li><a href="reservationList.html">Reservation List</a></li>
-            <li><a href="reservationTable.html">Reservation Table</a></li>
+          </ul>
+        </li>
+        <li class="submenu">
+          <a id="TablesControllerTab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/places.svg') }}"
+              alt="img" /><span>Tables</span>
+            <span class="menu-arrow"></span></a>
+          <ul>
+            <li><a id="T-index" href="{{ route('tables.index') }}">Tables List</a></li>
           </ul>
         </li>
         <li class="submenu">
@@ -75,21 +82,13 @@
         </li>
 
         <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/time.svg') }}"
+          <a id="SalesControllerTab" href="javascript:void(0);"><img src="{{ asset('assets/img/icons/time.svg') }}"
               alt="img" /><span>Sales</span>
             <span class="menu-arrow"></span></a>
           <ul>
-            <li><a href="salesdaily.html">Daily Sales</a></li>
-            <li><a href="salesmonthly.html">Monthly Income</a></li>
+            <li><a id="S-salesDaily" href="{{ route('sales.salesDaily') }}">Daily Sales</a></li>
+            <li><a id="S-salesMonthly" href="{{ route('sales.salesMonthly') }}">Monthly Income</a></li>
             <li><a href="salesReport.html">Sales Report</a></li>
-          </ul>
-        </li>
-        <li class="submenu">
-          <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/places.svg') }}"
-              alt="img" /><span>Branch</span>
-            <span class="menu-arrow"></span></a>
-          <ul>
-            <li><a href="branch.html">Branch List</a></li>
           </ul>
         </li>
         <li class="submenu">

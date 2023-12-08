@@ -68,7 +68,7 @@
               <!-- lOGO TEXT HERE -->
               <a href="index.html" class="navbar-brand"
                 ><img
-                  src="images/logo2.png"
+                  src="{{ asset('assets/customerAssets/images/logo2.png') }}"
                   alt="Leonidas Restaurant"
                   class="navbar-logo"
               /></a>
@@ -128,9 +128,6 @@
           </div>
         </section>
 
-        <!-- ABOUT -->
-
-        <!-- TEAM -->
 
         <!-- MENU-->
         <section id="menu" data-stellar-background-ratio="0.5">

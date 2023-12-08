@@ -5,7 +5,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h4>Restocking History</h4>
-                    <h6>Restocking History List on (<a class="card-title"><span id="current-date"></span></a>)</h6>
+                    <h6>Restocking History List on {{ $formattedDate }}</h6>
                 </div>
             </div>
 
@@ -32,34 +32,27 @@
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
                             <div class="row">
-                                <div class="col-lg-2 col-sm-6 col-12">
+                                <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter User Name">
+                                        <input type="text" placeholder="Enter Stock Name">
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Phone">
+                                        <input type="text" placeholder="Enter Quantity">
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Email">
+                                        <input type="text" placeholder="Enter Unit">
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" class="datetimepicker cal-icon" placeholder="Choose Date">
+                                        <input type="text" placeholder="Enter Unit Cost">
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <select class="select">
-                                            <option>Disable</option>
-                                            <option>Enable</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-1 col-sm-6 col-12 ms-auto">
                                     <div class="form-group">
                                         <a class="btn btn-filters ms-auto"><img
@@ -74,9 +67,7 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-
                                     <th>Stock Name</th>
-                                    <th>Category</th>
                                     <th>Quantity</th>
                                     <th>Unit</th>
                                     <th>Unit Cost</th>
@@ -87,7 +78,6 @@
                               @foreach ($histories as $history)
                                 <tr>
                                   <td>{{ $history->stockName }}</td>
-                                  <td>{{ $history->inventoryCategory->name }}</td>
                                   <td>{{ $history->quantity }}</td>
                                   <td>{{ $history->unit }}</td>
                                   <td>{{ $history->unitCost }}</td>
@@ -101,7 +91,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -109,26 +98,11 @@
             </div>
 
             <div style="text-align: right;">
-                <a href="javascript:void(0);" class="btn btn-cancel" onclick="goBack()">Cancel</a>
+                <a href="{{ route('inventory.inventoryRestockingHistory') }}" class="btn btn-cancel">Cancel</a>
             </div>
         </div>
 
 
 
-        <script>
-            const currentDate = new Date();
 
-            const monthNames = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ];
-
-            const month = monthNames[currentDate.getMonth()];
-            const day = currentDate.getDate();
-            const year = currentDate.getFullYear();
-
-            const formattedDate = ${month} ${day}, ${year};
-
-            document.getElementById('current-date').textContent = formattedDate;
-        </script>
     @endsection

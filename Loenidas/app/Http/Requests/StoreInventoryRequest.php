@@ -23,9 +23,7 @@ class StoreInventoryRequest extends FormRequest
   {
     return [
       "stockName" => "required|string",
-      "quantity" => "required|integer",
-      "unit" => "required|in:Kilogram,Gram,Pieces",
-      "unitCost" => "required|integer",
+      "unit" => "required|string",
       "reorderPoint" => "required|integer",
       "inventory_category_id" => "required|integer"
     ];

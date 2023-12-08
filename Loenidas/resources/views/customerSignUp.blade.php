@@ -64,6 +64,7 @@
                                     <span class="fas toggle-password fa-eye-slash"></span>
                                 </div>
                             </div>
+                            <input type="hidden" name="role" value="Customer">
                             <div class="form-login">
                                 <button type="submit" class="btn btn-login">Sign Up</button>
                             </div>

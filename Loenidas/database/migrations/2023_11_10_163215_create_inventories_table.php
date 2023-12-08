@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->string('stockName');
-            $table->enum('category', ['meat','fish']);
             $table->integer('quantity')->default(0);
-            $table->enum('unit', ['Kilogram', 'Gram', 'Pieces']);
-            $table->integer('unitCost');
+            $table->string('unit');
             $table->integer('reorderPoint');
             $table->enum('status', ['Cart', 'Inventory'])->default('Inventory');
             $table->timestamps();

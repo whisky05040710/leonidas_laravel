@@ -24,6 +24,7 @@ class signupCustomerRequest extends FormRequest
         return [
             "firstname"=> "required|string",
             "lastname"=> "required|string",
+            "role"=> "required|string|in:Customer",
             "email"=> "required|string",
             "password"=> "required|string|min:8",
         ];

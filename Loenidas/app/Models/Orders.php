@@ -10,12 +10,21 @@ class Orders extends Model
     use HasFactory;
     protected $fillable = [
         'status',
-        'discount_type',
-        'discount_amount',
-        'totalAfterDiscount',
-        'serviceCharge',
-        'vat',
-        'totalBill',
+        'user_id',
+        'menu_id',
+        'quantity',
+        'total_price_per_order',
+        'pos_id',   
     ];
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class, 'menu_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

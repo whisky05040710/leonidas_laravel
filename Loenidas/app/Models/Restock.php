@@ -13,13 +13,7 @@ class Restock extends Model
         "stockName",
         "quantity",
         "unit",
-        "unitCost",
-        "reorderPoint",
-        "inventory_category_id"
+        "unitCost"
       ];
     
-      public function inventoryCategory()
-      {
-        return $this->belongsTo(InventoryCategory::class, 'inventory_category_id');
-      }
 }

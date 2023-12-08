@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->enum('role', ['Manager', 'Chef', 'Cashier', 'Waiter']);
             $table->string('profile');
+            $table->enum('accountStatus', ['Active','Locked']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

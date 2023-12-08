@@ -16,6 +16,18 @@ class OrdersController extends Controller
         //
     }
 
+    public function ordersChef()
+    {
+        $orders = Orders::all();
+        return view('admin.ordersChef', compact('orders'));
+    }
+
+    public function ordersWaiter()
+    {
+        $orders = Orders::all();
+        return view('admin.ordersWaiter', compact('orders'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

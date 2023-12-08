@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
+            $table->enum('role', ['Admin','Manager', 'Head Chef', 'Cashier', 'Waiter', 'Customer']);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

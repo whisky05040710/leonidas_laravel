@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Models\Restock;
 use App\Http\Requests\StoreInventoryRequest;
+use App\Http\Requests\StoreRestockRequest;
 use App\Http\Requests\UpdateInventoryRequest;
 use App\Models\InventoryCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class InventoryController extends Controller
 {
@@ -55,48 +57,59 @@ class InventoryController extends Controller
 
   public function inventoryRestocking()
   {
-        $restocks = Restock::with('inventoryCategory')
-                    ->where('status', 'Cart')
+        $restocks = Restock::where('status', 'Cart')
                     ->get();
 
-    $categories = InventoryCategory::all();
-    return view("admin.inventoryRestocking", compact("restocks", "categories"));
+    return view("admin.inventoryRestocking", compact("restocks"));
   }
 
   public function updateInventory(Request $request)
   {
-      $stockName = $request->input('stockName');
-      $quantity = $request->input('quantity');
-  
-      // Update the inventory based on the $stockName and $quantity
-      $inventory = Inventory::where('stockName', $stockName)->first();
-      $restock = Restock::where('stockName', $stockName)->first();
-  
-      if ($inventory && $restock) {
-          // Update the inventory quantity
-          $inventory->quantity += $quantity;
-          $inventory->save();
-  
-          // Update the restock status to "Inventory"
-          $restock->status = 'Inventory';
-          $restock->save();
-  
-          return response()->json(['success' => true, 'message' => 'Inventory updated successfully']);
-      }
-  
-      return response()->json(['success' => false, 'message' => 'Inventory or Restock not found']);
+    $dataToSend = $request->input('dataToSend');
+
+    foreach ($dataToSend as $data) {
+        $stockName = $data['stockName'];
+        $quantity = $data['quantity'];
+
+        $inventory = Inventory::where('stockName', $stockName)->first();
+        $restock = Restock::where('stockName', $stockName)->first();
+
+        if ($inventory && $restock) {
+            // Update Inventory table quantity
+            $inventory->quantity += $quantity;
+            $inventory->save();
+
+            // Update Restock table status
+            Restock::where('stockName', $stockName)->update(['status' => 'Inventory']);
+        }
+    }
+
+    return response()->json(['success' => true, 'message' => 'Inventory updated successfully']);
   }
 
   public function inventoryRestockingHistory()
   {
-    $histories = Restock::all();
+    $histories = Restock::select(DB::raw('DATE(updated_at) as restock_date'), 
+        DB::raw('COUNT(*) as total_restocks'),
+        DB::raw('SUM(unitCost) as total_restock_cost'))
+        ->where('status', 'Inventory')
+        ->groupBy('restock_date')
+        ->orderBy('restock_date', 'desc')
+        ->get();
+
     return view('admin.inventoryRestockingHistory', compact('histories'));
   }
 
-  public function inventoryRestockingHistoryList($id)
+  public function inventoryRestockingHistoryList(Request $request)
   {
-    $histories = Restock::where('id', $id)->get();
-    return view('admin.inventoryRestockingHistoryList', compact('histories'));
+    $date = $request->input('date');
+    $formattedDate = Carbon::parse($date)->format('F d, Y');
+
+    $histories = Restock::whereDate('updated_at', $date)
+        ->where('status', 'Inventory')
+        ->get();
+
+    return view('admin.inventoryRestockingHistoryList', compact('histories','formattedDate'));
   }
 
   /**
@@ -113,12 +126,13 @@ class InventoryController extends Controller
   public function store(StoreInventoryRequest $request)
   {
     $validatedData = $request->validated();
+
     Inventory::create($validatedData);
 
     return back();
   }
 
-  public function restock_store(StoreInventoryRequest $request)
+  public function restock_store(StoreRestockRequest $request)
   {
     $validatedData = $request->validated();
     Restock::create($validatedData);

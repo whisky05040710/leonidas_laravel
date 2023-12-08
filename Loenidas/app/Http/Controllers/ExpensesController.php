@@ -28,6 +28,7 @@ class ExpensesController extends Controller
         $expenses = Expenses::all(); 
         return view('admin.expenses', compact('expenses', 'monthlyExpenses'));
     }
+
     public function addExpensesForm()
 {
     return view('admin.expensesAdd');
@@ -55,17 +56,42 @@ class ExpensesController extends Controller
       return redirect('/expenses');
     }
 
-    public function expensesDetails($year, $month)
+    public function expensesDetails(Request $request)
     {
-        $yearMonth = ucfirst($month) . ' ' . $year;
-    
-        $expensesDetails = Expenses::where('year', $year)
-            ->where('month', ucfirst($month)) 
-            ->get();
-    
-        return view('admin.expensesDetails', compact('expensesDetails'));
+        $year = $request->input('year');
+        $month = ucfirst($request->input('month'));
+
+    $yearMonth = $month . ' ' . $year;
+
+    $expensesDetails = Expenses::where('year', $year)
+        ->where('month', $month)
+        ->get();
+
+    return view('admin.expensesDetails', compact('expensesDetails', 'year', 'month'));
     }
     
+    public function editExpenses(Request $request)
+    {
+
+    $expensesId = $request->input('expenses_id'); 
+    $expensesName = $request->input('expensesName');
+    $amount = $request->input('amount');
+
+
+    $expense = Expenses::find($expensesId);
+
+    if ($expense) {
+        $expense->expensesName = $expensesName;
+        $expense->amount = $amount;
+        
+        $expense->save();
+
+        
+        return redirect()->back()->with('success', 'Expense updated successfully');
+    } else {
+        return redirect()->back()->with('error', 'Expense not found');
+    }
+    }
     
     /**
      * Show the form for creating a new resource.

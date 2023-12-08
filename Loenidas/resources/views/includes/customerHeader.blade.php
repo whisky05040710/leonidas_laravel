@@ -8,7 +8,7 @@
 
     <ul class="nav user-menu">
         <li class="nav-item dropdown has-arrow flag-nav">
-            <a class="nav-link dropdown-toggle" href="customerCart.html" role="button">
+            <a class="nav-link dropdown-toggle" href="{{ route('customer.cart') }}" role="button">
                 <img src="assets/img/cart.png" style="width: 80px; height: 45px; margin-left: 30%"
                     alt="Cart" />
             </a>

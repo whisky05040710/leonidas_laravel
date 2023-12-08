@@ -33,47 +33,20 @@ class PosController extends Controller
    */
   public function store(Request $request)
   {
-    $subtotal = $request->input('subtotal');
-    $discountType = $request->input('discountType');
-    $discountAmount = $request->input('discountAmount');
-    $totalAfterDiscount = $request->input('totalAfterDiscount');
-    $serviceCharge = $request->input('serviceCharge');
-    $vat = $request->input('vat');
-    $totalBill = $request->input('totalBill');
+    $orderItems = $request->input('orderItems'); // Assuming order items are sent as an array from the frontend
+    $posId = uniqid(); // Generate a unique POS ID for this group of orders
 
-    // You may need to retrieve other form fields as well
+    foreach ($orderItems as $item) {
+        $order = new Orders();
+        $order->user_id = null; // User ID is null for orders placed via POS
+        $order->menu_id = $item['menuId'];
+        $order->status = 'Order Paid';
+        $order->quantity = $item['quantity'];
+        $order->total_price_per_order = $item['totalPrice']; // Assuming this is the total price per menu item
+        $order->pos_id = $posId;
 
-    // Store the order in the database
-    $order = new Orders();
-    $order->status = 'Order Paid';
-    $order->discount_type = $discountType;
-    $order->discount_amount = $discountAmount;
-    $order->totalAfterDiscount = $totalAfterDiscount;
-    $order->serviceCharge = $serviceCharge;
-    $order->vat = $vat;
-    $order->totalBill = $totalBill;
-    // Set other necessary fields
-
-    // Save the order
-    $order->save();
-
-    $orderItems = $request->input('orderItems');
-    if ($orderItems) {
-        foreach ($orderItems as $item) {
-            $orderItem = new OrdersItems(); // Assuming you have an OrderItem model
-            $orderItem->order_id = $order->id; // Set the order ID
-            $orderItem->menu_id = $item['menuId'];
-            $orderItem->quantity = $item['quantity'];
-            $orderItem->menu_price = $item['menuPrice'];
-            $orderItem->total_price = $item['totalPrice'];
-            // Set other necessary fields for order items
-
-            $orderItem->save();
-        }
+        $order->save();
     }
-
-    // Return a response (optional)
-    return response()->json(['message' => 'Order stored successfully'], 200);
 
     return redirect()->route('pos.index');
   }

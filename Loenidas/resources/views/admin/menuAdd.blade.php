@@ -121,7 +121,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="col-lg-5 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="menuImage">Menu Image</label>
                                 <div class="image-upload image-upload-new">
@@ -131,12 +131,12 @@
                                         <img id="uploaded-image" src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                                         <h4>Drag and drop a file to upload</h4>
                                     </div>
-                                    @error('image')
-                                        <div class="invalid-feedback d-block">
-                                            <strong>{{ $message }}</strong>
-                                        </div>
-                                    @enderror
                                 </div>
+                                @error('image')
+                                <div class="invalid-feedback d-block">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
                             </div>
                         </div>
                     </div>

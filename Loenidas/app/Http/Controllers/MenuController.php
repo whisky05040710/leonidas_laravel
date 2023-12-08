@@ -59,13 +59,14 @@ public function addMenu(addmenuRequest $request)
       return redirect('/menu');
 }
 
-public function menuDetails($id)
+public function menuDetails(Request $request)
 {
-
+    $id = $request->query('id');
     $menu = Menu::find($id);
 
     return view('admin.menuDetails', compact('menu'));
 }
+
 
     public function menuCategory()
     {

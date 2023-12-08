@@ -99,10 +99,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="me-3" href="{{ route('menu.details', $menu->id) }}">
+                                            <a class="btn btn-link" href="{{ route('menu.details', ['id' => $menu->id]) }}">
                                                 <img src="assets/img/icons/eye.svg" alt="img">
                                             </a>
-                                        </td>
+                                        </td>                                                                             
                                     </tr>
                                 @endforeach
                             </tbody>

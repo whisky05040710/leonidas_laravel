@@ -66,7 +66,7 @@
 
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Submit</button>
-                                <a class="btn btn-cancel" action="{{ route('expenses.index') }}">Cancel</a>
+                                <a class="btn btn-cancel" href="{{ route('expenses.index') }}">Cancel</a>
                             </div>
                         </div>
                         </form>

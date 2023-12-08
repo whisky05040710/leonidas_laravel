@@ -31,62 +31,54 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="{{ route('inventory.store') }}" method="post">
+          <form action="{{ route('inventory.store') }}" method="post">
               @csrf
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Stock Name<span class="manitory">*</span></label>
+                    <label>Stock Name</label>
                     <input type="text" name="stockName">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label for="category">Category<span class="manitory">*</span></label>
+                    <label for="category">Category</label>
                     <select name="inventory_category_id" id="category" class="form-control select" required>
-                      <option value="" selected disabled>Select</option>
+                      <option value="" selected disabled>Select Category</option>
                       @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                       @endforeach
                     </select>
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Quantity<span class="manitory">*</span></label>
-                    <input type="text" name="quantity" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-                  </div>
-                </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label for="unit">Unit<span class="manitory">*</span></label>
+                    <label for="unit">Unit</label>
                     <select name="unit" id="unit" class="form-control select">
-                      <option value="">Select</option>
-                      <option value="Kilogram">Kilogram</option>
-                      <option value="Gram">Gram</option>
-                      <option value="Pieces">Pieces</option>
+                      <option value="">Select Unit</option>
+                      <option value="Pounds">Pounds (lb)</option>
+                      <option value="Ounces">Ounces (oz)</option>
+                      <option value="Kilogram">Kilogram (kg)</option>
+                      <option value="Grams">Grams (g)</option>
+                      <option value="Liters">Liters (l)</option>
+                      <option value="Milliliters">Milliliters (ml)</option>
+                      <option value="Each">Each (ea)</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Unit Cost<span class="manitory">*</span></label>
-                    <input type="text" name="unitCost" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group">
-                    <label>Reorder Point<span class="manitory">*</span></label>
+                    <label>Reorder Point</label>
                     <input type="text" name="reorderPoint" oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
                   </div>
                 </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-submit">Confirm</button>
-            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-          </div>
+              </div>     
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-submit">Confirm</button>
+              <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            </div>
           </form>
+        </div>
         </div>
       </div>
     </div>
@@ -139,13 +131,9 @@
                   <input type="text" placeholder="Enter Stock Name">
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-6 col-12">
+              <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
-                  <select class="select">
-                    <option>Select Category</option>
-                    <option>Meats</option>
-                    <option>Condements</option>
-                  </select>
+                  <input type="text" placeholder="Enter Category Name">
                 </div>
               </div>
               <div class="col-lg-2 col-sm-6 col-12">
@@ -155,10 +143,10 @@
               </div>
               <div class="col-lg-2 col-sm-6 col-12">
                 <div class="form-group">
-                  <input type="text" placeholder="Enter Unit Cost">
+                  <input type="text" placeholder="Enter Unit">
                 </div>
               </div>
-              <div class="col-lg-3 col-sm-6 col-12">
+              <div class="col-lg-2 col-sm-6 col-12">
                 <div class="form-group">
                   <input type="text" placeholder="Enter Reorder Point">
                 </div>
@@ -181,7 +169,6 @@
                 <th>Category</th>
                 <th>Quantity</th>
                 <th>Unit</th>
-                <th>Unit Cost</th>
                 <th>Reorder Point</th>
                 <th>Action</th>
               </tr>
@@ -197,7 +184,6 @@
                 @endif
                 <td>{{ $inventory->quantity }}</td>
                 <td>{{ $inventory->unit }}</td>
-                <td>{{ $inventory->unitCost }}</td>
                 <td>{{ $inventory->reorderPoint }}</td>
                 <td>
                   <a class="me-3" href="inventoryStocksEdit.html">

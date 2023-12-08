@@ -11,9 +11,7 @@ class Inventory extends Model
 
   protected $fillable = [
     "stockName",
-    "quantity",
     "unit",
-    "unitCost",
     "reorderPoint",
     "inventory_category_id"
   ];

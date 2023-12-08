@@ -123,7 +123,7 @@
                                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <script>
                                         $(document).ready(function() {
-                                          var cartItems = [];
+                                            var cartItems = [];
 
                                             // Function to calculate total quantity
                                             function calculateTotalQuantity() {
@@ -281,10 +281,10 @@
                                                     var quantity = 1;
 
                                                     cartItems.push({
-                                                      menuId: menuId,
-                                                      quantity: quantity,
-                                                      menuPrice: itemPrice,
-                                                      totalPrice: itemPrice 
+                                                        menuId: menuId,
+                                                        quantity: quantity,
+                                                        menuPrice: itemPrice,
+                                                        totalPrice: itemPrice
                                                     });
 
                                                     var cartItemHTML = '<ul class="product-lists" data-menu-id="' + menuId + '">' +
@@ -479,21 +479,9 @@
                                 <div class="btn-pos">
                                     <ul>
                                         <li>
-                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#placedorderlist"><img
-                                                    src="assets/img/icons/transcation.svg" alt="img"
-                                                    class="me-1" />Placed Order List</a>
-                                        </li>
-                                        <li>
-                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#reservationlist"><img
+                                            <a class="btn" id="openFirstModal"><img
                                                     src="assets/img/icons/transcation.svg" alt="img"
                                                     class="me-1" />Reservation List
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="btn" data-bs-toggle="modal" data-bs-target="#paidorderlist"><img
-                                                    src="assets/img/icons/transcation.svg" alt="img"
-                                                    class="me-1" />Paid
-                                                Order List
                                             </a>
                                         </li>
                                     </ul>
@@ -508,65 +496,6 @@
     </div>
     </div>
 
-    <div class="modal fade" id="placedorderlist" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Placed Order List</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content">
-                        <div class="table-top">
-                            <div class="search-set">
-                                <div class="search-input">
-                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
-                                            alt="img" /></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table datanew">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>2023854</td>
-
-                                        <td>Francis</td>
-                                        <td>
-                                            <a class="me-3" href="javascript:void(0);">
-                                                <img src="assets/img/icons/eye.svg" alt="img" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3475634</td>
-
-                                        <td>Joe</td>
-                                        <td>
-                                            <a class="me-3" href="javascript:void(0);">
-                                                <img src="assets/img/icons/eye.svg" alt="img" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="reservationlist" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -632,56 +561,99 @@
         </div>
     </div>
 
-    <div class="modal fade" id="paidorderlist" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal fade" id="secondModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Paid Order List</h5>
+                    <h5 class="modal-title">Customer Orders and Reservation Details</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="tab-content">
-                        <div class="table-top">
-                            <div class="search-set">
-                                <div class="search-input">
-                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
-                                            alt="img" /></a>
+                        <div class="card flex-fill">
+                            <div class="card-header">
+                                <h5 class="card-title">Orders Details</h5>
+                            </div>
+                            <div class="card-body pt-0 pb-2">
+                                <div class="setvalue">
+                                    <ul>
+                                        <li>
+                                            <h5>Adobo (x3)</h5>
+                                            <h6>700.00</h6>
+                                        </li>
+                                        <li>
+                                            <h5>Shake (x3)</h5>
+                                            <h6>900.00</h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr />
+                            </div>
+                            <div class="card-header">
+                                <h5 class="card-title">Reservation Details</h5>
+                            </div>
+                            <div class="card-body pt-0 pb-2">
+                                <div class="setvalue">
+                                    <ul>
+                                        <li>
+                                            <h5>Phone Number</h5>
+                                            <h6>0938 606 2492</h6>
+                                        </li>
+                                        <li>
+                                            <h5>Date</h5>
+                                            <h6>June 12, 2023</h6>
+                                        </li>
+                                        <li>
+                                            <h5>Time</h5>
+                                            <h6>1:00 PM</h6>
+                                        </li>
+                                        <li>
+                                            <h5>People</h5>
+                                            <h6>5 People</h6>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table datanew">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Table Number</th>
-                                        <th>Total Bill</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2022-03-07</td>
-                                        <td>Walk-in Customer</td>
-                                        <td>12</td>
-                                        <td>P 200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2022-03-07</td>
-                                        <td>Walk-in Customer</td>
-                                        <td>12</td>
-                                        <td>P 200.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                    </div> <button class="btn btn-secondary" id="backToFirstModal">Back</button>
+                </div> 
             </div>
         </div>
     </div>
+    </div>
+
+    {{-- modal script --}}
+    <script>
+        $(document).ready(function() {
+            // Open first modal (reservation list)
+            $('#openFirstModal').on('click', function() {
+                $('#reservationlist').modal('show');
+            });
+
+            // Handle click on eye icon to open the second modal
+            $('.datanew').on('click', 'tbody tr td a', function() {
+                // Your logic to handle the eye icon click, for example:
+                // Get data or perform any other operations
+
+                // Show the second modal
+                $('#secondModal').modal('show');
+
+                // Hide the first modal (reservation list)
+                $('#reservationlist').modal('hide');
+            });
+
+            // Handle click on back button in the second modal
+            $('#backToFirstModal').on('click', function() {
+                // Show the first modal (reservation list)
+                $('#reservationlist').modal('show');
+
+                // Hide the second modal
+                $('#secondModal').modal('hide');
+            });
+        });
+    </script>
 
 
     <style>
