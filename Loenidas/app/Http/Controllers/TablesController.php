@@ -34,6 +34,7 @@ class TablesController extends Controller
         Tables::create([
             'tableNum' => $validatedData['tableNum'],
             'capacity' => $validatedData['capacity'],
+            'status' => 'Available',
             ]);
         return redirect()->route('tables.index')->with('success', 'Table created successfully');
     }

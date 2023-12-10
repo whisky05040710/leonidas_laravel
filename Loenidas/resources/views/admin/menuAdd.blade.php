@@ -143,7 +143,7 @@
 
                     <div class="col-lg-12">
                         <button type="submit" class="btn btn-submit me-2">Submit</button>
-                        <a class="btn btn-cancel" action="{{ route('menu.index') }}">Cancel</a>
+                        <a class="btn btn-cancel" href="{{ route('menu.index') }}">Cancel</a>
                     </div>
                     </form>
                 </div>

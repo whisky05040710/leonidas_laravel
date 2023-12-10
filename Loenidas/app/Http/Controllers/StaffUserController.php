@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\StaffUser;
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreStaffUserRequest;
 use App\Http\Requests\UpdateStaffUserRequest;
 
@@ -13,7 +13,7 @@ class StaffUserController extends Controller
      */
     public function index()
     {
-        $staffUsers = StaffUser::with('user')->get();
+        $staffUsers = User::whereNotIn('role', ['Customer'])->get();
         return view("admin.staffUser", compact("staffUsers"));
     }
 
@@ -28,28 +28,29 @@ class StaffUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreStaffUserRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+
+        $validatedData = $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'role' => 'required|string|in:Manager,Head Chef,Cashier,Waiter',
+            'profile' => 'nullable',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|string|min:8',
+            
+        ]);
 
         $imagePath = $validatedData['profile']->store('profile','public');
 
-        $user = new User();
-        $user->fill([
-            'email' => $validatedData['email'],
-            'password'=> bcrypt($validatedData['password']),
-        ]);
-        $user->save();
-
-        $user_id = $user->id;
-
-
-        StaffUser::create([
-            'user_id'=> $user_id,
+        User::create([
             'firstname' => $validatedData['firstname'],
             'lastname'=> $validatedData['lastname'],
             'role' => $validatedData['role'],
             'profile' => $imagePath,
+            'accountStatus' => 'Active',
+            'email' => $validatedData['email'],
+            'password'=> bcrypt($validatedData['password']),
             ]);
             alert()->success('success','Staff Account have been created');
             return redirect('/staffs');
@@ -58,7 +59,7 @@ class StaffUserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StaffUser $staffUser)
+    public function show(User $staffUser)
     {
         //
     }
@@ -66,7 +67,7 @@ class StaffUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StaffUser $staffUser)
+    public function edit(User $staffUser)
     {
         //
     }
@@ -74,7 +75,7 @@ class StaffUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStaffUserRequest $request, StaffUser $staffUser)
+    public function update(UpdateStaffUserRequest $request, User $staffUser)
     {
         //
     }
@@ -82,7 +83,7 @@ class StaffUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StaffUser $staffUser)
+    public function destroy(User $staffUser)
     {
         //
     }

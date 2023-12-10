@@ -72,12 +72,17 @@
                     </div>
                 </div>
                 <div class="login-img">
-                    <img src="assets/img/log.png" alt="img">
+                    <img src="assets/img/SIGN1.jpg" alt="img">
                 </div>
             </div>
         </div>
     </div>
+    <style>
 
+        .login-img {
+          background-color: black;
+        }
+      </style>
 
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 

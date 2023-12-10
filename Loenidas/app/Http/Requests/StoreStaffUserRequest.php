@@ -24,7 +24,7 @@ class StoreStaffUserRequest extends FormRequest
         return [
             "firstname"=> "required|string",
             "lastname"=> "required|string",
-            "role"=> "required|in:Manager,Chef,Cashier,Waiter",
+            "role"=> "required|in:Manager,Head Chef,Cashier,Waiter",
             "email"=> "required|string",
             "password"=> "required|string",
             "profile"=> "required|image|mimes:jpeg,png,jpg",

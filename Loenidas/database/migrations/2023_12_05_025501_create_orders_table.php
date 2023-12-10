@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('menu_id');
-            $table->enum('status', ['Order Cart', 'Order Placed', 'Order  Paid', 'Order Cooked', 'Order Served'])->default('Order Cart');
-            $table->integer('quantity');
-            $table->string('total_price_per_order');
-            $table->integer('pos_id')->nullable()->unique();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('reservation_id')->nullable();
+            $table->enum('status', ['Order Cart', 'Order Placed', 'Order Paid', 'Order Cooked', 'Order Served', 'Order Completed'])->default('Order Cart');
+            $table->enum('discountType', ['None', 'PWD', 'Senior Citizen'])->nullable();
+            $table->integer('totalBill')->nullable();
+            $table->unsignedBigInteger('table_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
+
             $table->timestamps();
 
         });

@@ -28,10 +28,10 @@
 
                             <div class="form-group">
                                 <label for="role">Role</label>
-                                <select name="role" id="role" class="form-control">
+                                <select name="role" id="role" class="select form-control">
                                     <option hidden value="">Select</option>
                                     <option value="Manager">Manager</option>
-                                    <option value="Chef">Chef</option>
+                                    <option value="Head Chef">Chef</option>
                                     <option value="Cashier">Cashier</option>
                                     <option value="Waiter">Waiter</option>
                                 </select>
@@ -81,13 +81,13 @@
 
                     </div>
 
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-4 col-sm-6 col-12">
                         <div class="form-group">
                             <label> Profile Picture</label>
                             <div class="image-upload image-upload-new">
-                                <input type="file" name="profile" accept=".jpg, .jpeg, .png">
+                                <input type="file" name="profile" accept=".jpg, .jpeg, .png" id="upload-input">
                                 <div class="image-uploads">
-                                    <img src="assets/img/icons/upload.svg" alt="img">
+                                    <img id="uploaded-image" src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                                     <h4>Drag and drop a file to upload</h4>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-submit me-2">Submit</button>
-                        <a href="" class="btn btn-cancel">Cancel</a>
+                        <a href="{{ route('staffs.index') }}" class="btn btn-cancel">Cancel</a>
                     </div>
                     </form>
                 </div>

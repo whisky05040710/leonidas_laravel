@@ -10,6 +10,16 @@ class Tables extends Model
     use HasFactory;
     protected $fillable = [
         "tableNum",
-        "capacity"
+        "capacity",
+        "status"
+
     ];
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'table_id');
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservations::class, 'table_id');
+    }
 }

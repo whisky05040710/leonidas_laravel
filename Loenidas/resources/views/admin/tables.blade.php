@@ -97,14 +97,24 @@
                                 <tr>
                                     <th>Table Number</th>
                                     <th>Capacity</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($tables as $table)
                                     <tr>
-                                    <td>{{ $table->tableNum }}</td>
-                                        <td>{{ $table->capacity }}</td>
+                                    <td>Table {{ $table->tableNum }}</td>
+                                        <td>{{ $table->capacity }} People</td>
+                                        <td>
+                                            @if ($table->status == 'Available')
+                                                <span class="badges bg-lightgreen">Available</span>
+                                            @elseif ($table->status == 'Reserved')
+                                                <span class="badges bg-lightyellow">Reserved</span>
+                                            @else
+                                                <span class="badges bg-lightred">Occupied</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a class="me-3" href="inventoryStocksEdit.html">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">

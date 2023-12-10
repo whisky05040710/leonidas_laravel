@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ExpensesController;
@@ -29,6 +30,7 @@ use App\Models\Tables;
 //     return view("customer.menuOrders");
 // });
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::get('/inventory', [InventoryController::class, 'index']);
 Route::controller(InventoryController::class)->group(function () {
@@ -94,25 +96,37 @@ Route::middleware('auth')->group(function () {
   Route::get('/customerMenu', [CustomerController::class, 'customerMenu'])->name('customer.menu');
   Route::get('/customerCart', [CustomerController::class, 'customerCart'])->name('customer.cart');
   Route::get('/customerReservation', [CustomerController::class, 'customerReservation'])->name('customer.reservation');
+  Route::get('/customerHistory', [CustomerController::class, 'customerHistory'])->name('customer.history');
+  Route::post('/reservations/store',[CustomerController::class, 'storeReservation'])->name('reservations.store');
 Route::get('/customerHome', [CustomerController::class, 'index']);
 
 Route::post('/add-to-cart', [CustomerController::class, 'addToCart'])->name('addToCart');
-Route::post('/update-quantity', [CustomerController::class, 'updateQuantity'])->name('saveOrder');
+Route::post('/delete-to-cart', [CustomerController::class, 'deleteToCart'])->name('deleteToCart');
+Route::post('/update-order', [CustomerController::class, 'updateOrderDetails'])->name('updateOrderDetails');
 });
 
 route::resource('/staffs', 'App\Http\Controllers\StaffUserController');
 
-
 route::resource('/branch', 'App\Http\Controllers\BranchController');
+
+route::resource('/reservation', 'App\Http\Controllers\ReservationsController');
+Route::get('/reservationPOS{id}', [PosController::class, 'reservationPOS'])->name('pos.reservationPOS');
+Route::post('/updateOrderStatus/{id}', [PosController::class, 'updateOrderStatus'])->name('pos.updateOrderStatus');
+
+// Route::post('/save-order',[CustomerController::class, 'updateQuantitypos']);
+Route::put('/update-reservation/{reservations}/status', [CustomerController::class, 'updateReservationTable'])->name('update.reservation.status');
 
 Route::get('/tables', [TablesController::class, 'index'])->name('tables.index');
 Route::post('/tables', [TablesController::class, 'store'])->name('tables.store');
 
-Route::get('/ordersChef', [OrdersController::class, 'ordersChef']);
-Route::get('/ordersWaiter', [OrdersController::class, 'ordersWaiter']);
-
-Route::get('/reservation', [ReservationsController::class, 'index']);
+Route::get('/ordersChef', [OrdersController::class, 'ordersChef'])->name('orders.ordersChef');
+Route::put('/update-order-status-cooked/{orderId}', [OrdersController::class, 'updateOrderStatusCooked']);
+Route::get('/ordersWaiter', [OrdersController::class, 'ordersWaiter'])->name('orders.ordersWaiter');
+Route::put('/update-order-status-served/{orderId}', [OrdersController::class, 'updateOrderStatusServed']);
+Route::put('/update-order-status-completed/{orderId}', [OrdersController::class, 'updateOrderStatusCompleted']);
 
 Route::get('/salesDaily', [SalesController::class, 'salesDaily'])->name('sales.salesDaily');
+Route::get('/salesDailyDetails', [SalesController::class, 'salesDailyDetails'])->name('sales.salesDailyDetails');
 Route::get('/salesMonthly', [SalesController::class, 'salesMonthly'])->name('sales.salesMonthly');
+Route::get('/salesMonthlyDetails', [SalesController::class, 'salesMonthlyDetails'])->name('sales.salesMonthlyDetails');
 

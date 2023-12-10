@@ -25,31 +25,31 @@
           class="dropdown-toggle nav-link userset"
           data-bs-toggle="dropdown"
         >
-          <span class="user-img"
-            ><img src="{{ asset("assets/img/profiles/avator1.jp") }}g" alt="" />
+          <span class="user-img">
+            @if(auth()->check()&& auth()->user()->profile)
+            <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="" />
+            @endif
             <span class="status online"></span
           ></span>
         </a>
         <div class="dropdown-menu menu-drop-user">
           <div class="profilename">
             <div class="profileset">
-              <span class="user-img"
-                ><img src="{{ asset("assets/img/profiles/avator1.jp") }}g" alt="" />
+              <span class="user-img" >
+                @if(auth()->check()&& auth()->user()->profile)
+                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="" /> @endif
                 <span class="status online"></span
               ></span>
               <div class="profilesets">
-                <h6>John Doe</h6>
-                <h5>Admin</h5>
+                @if(auth()->check())
+                <h6>{{ auth()->user()->firstname }}</h6>
+                <h5>{{ auth()->user()->role }}</h5>
+                @endif
               </div>
             </div>
             <hr class="m-0" />
-            <a class="dropdown-item logout pb-0" href="signin.html"
-              ><img
-                src="{{ asset("assets/img/icons/log-out.svg") }}"
-                class="me-2"
-                alt="img"
-              />Logout</a
-            >
+            <a class="dropdown-item logout pb-0" href="{{ route('logout') }}">
+              <img src="{{ asset("assets/img/icons/log-out.svg") }}" class="me-2" alt="img" />Logout</a>
           </div>
         </div>
       </li>

@@ -52,7 +52,7 @@
                     <select class="select">
                       <option>Role</option>
                       <option>Manager</option>
-                      <option>Chef</option>
+                      <option>Head Chef</option>
                       <option>Cashier</option>
                       <option>Waiter</option>
                     </select>
@@ -88,8 +88,8 @@
                 <tr>
                     <td>{{ $staffUser->firstname }}{{ $staffUser->lastname }}</td>
                     <td>{{ $staffUser->role }}</td>
-                    <td>{{ $staffUser->user->email }}</td>
-                    <td>{{ $staffUser->user->password }}</td>
+                    <td>{{ $staffUser->email }}</td>
+                    <td>{{ $staffUser->password }}</td>
                   <td><span class="bg-lightgreen badges">Active</span></td>
                   <td>
                     <a class="me-3" href="newuseredit.html">

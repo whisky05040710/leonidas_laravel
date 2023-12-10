@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->enum('role', ['Manager', 'Chef', 'Cashier', 'Waiter']);
+            $table->enum('role', ['Manager', 'Head Chef', 'Cashier', 'Waiter']);
             $table->string('profile');
             $table->enum('accountStatus', ['Active','Locked']);
             $table->timestamps();

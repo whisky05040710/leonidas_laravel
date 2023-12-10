@@ -160,7 +160,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 col-sm-6">
+              {{-- <div class="col-md-4 col-sm-6">
                 <!-- MENU THUMB -->
                 <div class="menu-thumb">
                   <a
@@ -178,9 +178,9 @@
                     </div>
                   </a>
                 </div>
-              </div>
+              </div> --}}
 
-              <div class="col-md-4 col-sm-6">
+              {{-- <div class="col-md-4 col-sm-6">
                 <!-- MENU THUMB -->
                 <div class="menu-thumb">
                   <a
@@ -200,9 +200,9 @@
                     </div>
                   </a>
                 </div>
-              </div>
+              </div> --}}
 
-              {{-- <div class="col-md-4 col-sm-6">
+              <div class="col-md-4 col-sm-6">
                 <!-- MENU THUMB -->
                 <div class="menu-thumb">
                   <a
@@ -222,7 +222,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 col-sm-6">
+              {{-- <div class="col-md-4 col-sm-6">
                 <!-- MENU THUMB -->
                 <div class="menu-thumb">
                   <a
@@ -265,11 +265,11 @@
                 <!-- MENU THUMB -->
                 <div class="menu-thumb">
                   <a
-                    href="images/06.jpg"
+                    href="{{ asset('assets/customerAssets/images/06.jpg') }}"
                     class="image-popup"
                     title="Creamy Halo-Halo"
                   >
-                    <img src="images/06.jpg" class="img-responsive" alt="" />
+                    <img src="{{ asset('assets/customerAssets/images/06.jpg') }}" class="img-responsive" alt="" />
 
                     <div class="menu-info">
                       <div class="menu-item">
@@ -331,7 +331,7 @@
         <!-- TESTIMONIAL -->
 
         <section id="testimonial" data-stellar-background-ratio="0.5">
-          <a href="#team" class="section-btn btn btn-default smoothScroll"
+          <a href="{{ route('signin') }}" class="section-btn btn btn-default smoothScroll"
             >View Our Menu</a
           >
         </section>

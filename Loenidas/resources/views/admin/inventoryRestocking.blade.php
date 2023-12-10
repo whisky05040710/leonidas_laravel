@@ -154,6 +154,7 @@
                     success: function(response) {
                         // Handle the success response if needed
                         console.log(response);
+                        location.reload();
                     },
                     error: function(error) {
                         // Handle the error if needed

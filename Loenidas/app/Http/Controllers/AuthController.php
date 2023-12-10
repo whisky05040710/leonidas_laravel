@@ -21,41 +21,47 @@ class AuthController extends Controller
         $validatedData = $request->validated();
         if (Auth::attempt($validatedData) ){
             $user = Auth::user();
-            $user_id = auth()->id();
+            
 
-            $staff = StaffUser::where('user_id', $user_id)->first();
-
-
-        if ($user->role === 'Customer') {
-            return redirect()->route('customer.menu', ['id' => $user->id]);
-        } elseif ($staff->role === 'Admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($staff->role === 'Manager') {
-            return redirect()->route('sales.salesDaily');
-        } elseif ($staff->role === 'Chef') {
-            return redirect()->route('menu.index');
-        } elseif ($staff->role === 'Cashier') {
-            return redirect()->route('pos.index');
-        } elseif ($staff->role === 'Waiter') {
-            return redirect()->route('orders.ordersWaiter');
-        }
+            if ($user->role === 'Customer') {
+                return redirect()->route('customer.menu', ['id' => $user->id]);
+            } else {
+                switch ($user->role) {
+                    case 'Admin':
+                    case 'Manager':
+                        return redirect()->route('dashboard.index');
+                    case 'Head Chef':
+                        return redirect()->route('menu.index');
+                    case 'Cashier':
+                        return redirect()->route('pos.index');
+                    case 'Waiter':
+                        return redirect()->route('orders.ordersWaiter');
+                    default:
+                        return redirect()->route('signin'); 
+                }
+            }
         }
     }
     public function signup_customer(Request $request){
         $validatedData = $request->validate([
             'firstname' => 'required|string',
             'lastname' => 'required|string',
+            'role' => 'required|string|in:Customer',
+            'account_status' => 'nullable',
+            'profile' => 'nullable',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:Customer',
+            
         ]);
 
-        $user = User::create([
+        User::create([
             'firstname' => $validatedData['firstname'],
             'lastname' => $validatedData['lastname'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'role' => $validatedData['role'],
+            'account_status' => $validatedData['account_status'] ?? null,
+            'profile' => $validatedData['profile'] ?? null,
         ]);
         
         return redirect()->route('signin');
@@ -65,6 +71,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('signin');
     }
+    
 
     public function customerSignup()
     {

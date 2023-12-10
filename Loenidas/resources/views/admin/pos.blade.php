@@ -11,16 +11,7 @@
                         </div>
                     </div>
 
-                    <div class="search-set">
-                        <div class="search-input">
-                            <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img" /></a>
-                            <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                <label>
-                                    <input type="search" class="form-control form-control-sm" placeholder="Search..."
-                                        aria-controls="DataTables_Table_0" /></label>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <ul class="tabs owl-carousel owl-theme owl-product border-0">
                         @foreach ($categories as $category)
                             <li class="{{ $loop->first ? 'active' : '' }}" id="{{ $category->id }}">
@@ -96,24 +87,30 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="order-list">
                         <div class="orderid">
-                            <h4>Order List</h4>
-                            <h5>Order ID : #65565</h5>
-                            <h5>Customer Name : Francis Joe</h5>
-                        </div>
-                        <div class="actionproducts">
-                            <ul>
-                                <li>
-                                    <a href="javascript:void(0);" class="deletebg confirm-text"><img
-                                            src="assets/img/icons/delete-2.svg" alt="img"></a>
-                                </li>
-                            </ul>
+                            <h4>Orders Cart</h4>
                         </div>
                     </div>
 
                     <form id="orderPaidForm" action="{{ route('pos.store') }}" method="POST">
                         @csrf
                         <div class="card card-order">
-                            {{-- tbl --}}
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="select-split ">
+                                            <div class="select-group w-100">
+                                                <select class="select" name="table_id">
+                                                    <option>Select Table</option>
+                                                    @foreach ($availableTables as $table)
+                                                        <option value="{{ $table->id }}">Table {{ $table->tableNum }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="split-card"></div>
                             <div class="card-body pt-0">
                                 <div class="totalitem">
@@ -262,12 +259,12 @@
                                             $('.add-to-cart-button').on('click', function() {
                                                 var itemName = $(this).data('name');
                                                 var itemPrice = $(this).data('price');
-                                                var image = $(this).data('image');
+                                                var imagePath = $(this).data('image');
                                                 var menuId = $(this).data('menu-id');
 
                                                 console.log("Item Name: ", itemName);
                                                 console.log("Item Price: ", itemPrice);
-                                                console.log("Image: ", image);
+                                                console.log("Image: ", imagePath);
                                                 console.log("Menu ID: ", menuId);
 
                                                 // Check if the item is already in the cart
@@ -286,12 +283,14 @@
                                                         menuPrice: itemPrice,
                                                         totalPrice: itemPrice
                                                     });
+                                                    var baseUrl = 'http://127.0.0.1:8000/'; // Replace this with your Laravel base URL
+                                                    var imageUrl = baseUrl + 'storage/' + imagePath;
 
                                                     var cartItemHTML = '<ul class="product-lists" data-menu-id="' + menuId + '">' +
                                                         '<li>' +
                                                         '<div class="productimg">' +
                                                         '<div class="productimgs">' +
-                                                        '<img src="' + image + '" alt="img" />' +
+                                                        '<img src="' + imageUrl + '" alt="img" />' +
                                                         '</div>' +
                                                         '<div class="productcontet">' +
                                                         '<h4>' + itemName + '</h4>' +
@@ -395,7 +394,8 @@
                                                     serviceCharge: serviceCharge,
                                                     vat: vat,
                                                     totalBill: totalBill,
-                                                    orderItems: cartItems
+                                                    orderItems: cartItems,
+                                                    table_id: $('select[name="table_id"]').val()
                                                     // Add other necessary fields here
                                                 };
 
@@ -529,28 +529,63 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>43645364</td>
+                                        @foreach ($confirms as $confirm)
+                                            <tr>
+                                                <td>{{ $confirm->id }}</td>
 
-                                            <td>Francis</td>
-                                            <td>12</td>
-                                            <td>
-                                                <a class="me-3" href="javascript:void(0);">
-                                                    <img src="assets/img/icons/eye.svg" alt="img" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4674576</td>
+                                                <td>{{ $confirm->user->firstname }} {{ $confirm->user->lastname }}</td>
+                                                <td>{{ $confirm->table }}</td>
+                                                <td>
+                                                    <a class="me-3 view-details"
+                                                        href="{{ route('pos.reservationPOS', $confirm->id) }}">
+                                                        <img src="assets/img/icons/eye.svg" alt="img" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @php
+                                                $orders = App\Models\Orders::where('reservation_id', $confirm->id)->get();
+                                            @endphp
 
-                                            <td>Joe</td>
-                                            <td>12</td>
-                                            <td>
-                                                <a class="me-3" href="javascript:void(0);">
-                                                    <img src="assets/img/icons/eye.svg" alt="img" />
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            <div class="modal fade" id="secondModal-{{ $confirm->id }}" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Customer Orders and Reservation Details
+                                                            </h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="tab-content">
+                                                                <div class="card flex-fill">
+                                                                    <div class="card-header">
+                                                                        <h5 class="card-title">Orders Details</h5>
+                                                                    </div>
+                                                                    <div class="card-body pt-0 pb-2">
+                                                                        <div class="setvalue">
+                                                                            <ul>
+                                                                                @foreach ($orders as $order)
+                                                                                    <li>
+                                                                                        {{-- <h5>{{ $order->menu->menuName }} (x{{ $order->quantity }})</h5> --}}
+                                                                                        <h6>{{ $order->total_price_per_order }}
+                                                                                        </h6>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </div>
+                                                                        <hr />
+                                                                    </div>
+                                                                </div>
+                                                            </div> <button class="btn btn-secondary"
+                                                                id="backToFirstModal">Back</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -561,7 +596,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="secondModal" tabindex="-1" aria-hidden="true">
+    {{-- <div class="modal fade" id="secondModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -621,13 +656,12 @@
                 </div> 
             </div>
         </div>
-    </div>
+    </div> --}}
     </div>
 
     {{-- modal script --}}
     <script>
         $(document).ready(function() {
-            // Open first modal (reservation list)
             $('#openFirstModal').on('click', function() {
                 $('#reservationlist').modal('show');
             });
@@ -636,12 +670,33 @@
             $('.datanew').on('click', 'tbody tr td a', function() {
                 // Your logic to handle the eye icon click, for example:
                 // Get data or perform any other operations
+                var csrfToken = $('meta[name="csrf-token"]').attr("content");
+                var reservationId = $(this).data('reservation-id');
 
-                // Show the second modal
-                $('#secondModal').modal('show');
+                // Fetch data for the second modal using AJAX
+                $.ajax({
+                    type: 'GET',
+                    url: '/fetch/' + reservationId,
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    success: function(data) {
+                        // Access reservation and orders data
+                        var reservation = data.reservation;
+                        var orders = data.orders;
+                        // Now you can use reservation.date and orders in your second modal
+                        console.log(orders);
 
-                // Hide the first modal (reservation list)
-                $('#reservationlist').modal('hide');
+                        $('#secondModal-' + reservationId).modal('show');
+
+
+                        // Hide the first modal (reservation list)
+                        $('#reservationlist').modal('hide');
+                    },
+                    error: function(error) {
+                        console.error('Error fetching orders:', error);
+                    }
+                });
             });
 
             // Handle click on back button in the second modal
@@ -650,8 +705,16 @@
                 $('#reservationlist').modal('show');
 
                 // Hide the second modal
-                $('#secondModal').modal('hide');
+                $('#secondModal-' + reservationId).modal('show');
             });
+
+            // Function to update the content of the second modal with the fetched data
+            function updateSecondModalContent(reservation, orders) {
+                // Update your second modal content using reservation and orders data
+                // For example, update order details in the second modal
+                console.log('Updating second modal content:', reservation, orders);
+            }
+
         });
     </script>
 

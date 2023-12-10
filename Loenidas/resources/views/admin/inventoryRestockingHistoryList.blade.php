@@ -71,7 +71,6 @@
                                     <th>Quantity</th>
                                     <th>Unit</th>
                                     <th>Unit Cost</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,14 +80,6 @@
                                   <td>{{ $history->quantity }}</td>
                                   <td>{{ $history->unit }}</td>
                                   <td>{{ $history->unitCost }}</td>
-                                    <td>
-                                        <a class="me-3" href="inventoryPurchaseOrderEdit.html">
-                                            <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
-                                        </a>
-                                        <a class="me-3 confirm-text" href="javascript:void(0);">
-                                            <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
-                                        </a>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

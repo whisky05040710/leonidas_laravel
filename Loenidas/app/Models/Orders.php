@@ -9,22 +9,32 @@ class Orders extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'status',
-        'user_id',
-        'menu_id',
-        'quantity',
-        'total_price_per_order',
-        'pos_id',   
-    ];
 
-    public function menu()
-    {
-        return $this->belongsTo(Menu::class, 'menu_id');
-    }
+        'user_id',
+        'reservation_id',
+        'table_id',
+        'status',
+        'discountType',
+        'totalBill',
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reservation() // Corrected method name here
+    {
+        return $this->belongsTo(Reservations::class, 'reservation_id');
+    }
+    public function table() // Corrected method name here
+    {
+        return $this->belongsTo(Tables::class, 'table_id');
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(OrdersItems::class, 'order_id');
+    }
+    
 
 }

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\User;
+
 use App\Http\Requests\StoreOrdersRequest;
 use App\Http\Requests\UpdateOrdersRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class OrdersController extends Controller
 {
@@ -18,14 +22,74 @@ class OrdersController extends Controller
 
     public function ordersChef()
     {
-        $orders = Orders::all();
-        return view('admin.ordersChef', compact('orders'));
+        $today = Carbon::today()->format('F j, Y');
+        $orders = Orders::with(['orderItems.menu', 'user'])
+        ->where('status', 'Order Paid')
+        ->get();
+
+        $ordersCount = $orders->count();
+
+        return view('admin.ordersChef', compact('orders', 'ordersCount', 'today'));
     }
+    public function updateOrderStatusCooked($orderId)
+{
+    $order = Orders::find($orderId);
+    // Update the status of orders with 'Order Paid' to 'Order Cooked'
+    if ($order) {
+        $order->status = 'Order Cooked';
+        $order->save();
+        
+        return response()->json(['message' => 'Order status updated successfully'], 200);
+    }
+
+}
 
     public function ordersWaiter()
     {
-        $orders = Orders::all();
-        return view('admin.ordersWaiter', compact('orders'));
+        $today = Carbon::today()->format('F j, Y');
+        $orders = Orders::with(['orderItems.menu', 'user'])
+        ->where('status', 'Order Cooked')
+        ->get();
+
+        $orders2 = Orders::with(['orderItems.menu', 'user'])
+        ->where('status', 'Order Served')
+        ->get();
+
+        $ordersCount = $orders->count();
+        $ordersCount2 = $orders2->count();
+
+        return view('admin.ordersWaiter', compact('orders', 'orders2','ordersCount','ordersCount2', 'today'));
+    }
+
+    public function updateOrderStatusServed($orderId)
+    {
+        $order = Orders::find($orderId);
+    // Update the status of orders with 'Order Paid' to 'Order Cooked'
+    if ($order) {
+        $order->status = 'Order Served';
+        $order->save();
+        
+        return response()->json(['message' => 'Order status updated successfully'], 200);
+    }
+    
+    }
+
+    public function updateOrderStatusCompleted($orderId)
+    {
+        $order = Orders::find($orderId);
+    // Update the status of orders with 'Order Paid' to 'Order Cooked'
+    if ($order) {
+        $order->status = 'Order Completed';
+        $order->save();
+
+        if ($order->table) {
+            $order->table->status = 'Available';
+            $order->table->save();
+        }
+        
+        return response()->json(['message' => 'Order status updated successfully'], 200);
+    }
+    
     }
 
     /**

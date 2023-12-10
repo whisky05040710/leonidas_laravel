@@ -11,7 +11,6 @@ class OrdersItems extends Model
 
     protected $fillable = [
         'quantity',
-        'menu_price',
         'total_price',
         'menu_id',
         'order_id'

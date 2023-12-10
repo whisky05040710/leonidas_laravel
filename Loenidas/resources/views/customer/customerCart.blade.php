@@ -19,47 +19,82 @@
                                             </div>
                                             <div class="product-table">
                                                 @foreach ($customerCarts as $index => $customerCart)
-                                                    <ul class="product-lists">
-                                                        <li>
-                                                            <div class="productimg">
-                                                                <div class="productimgs">
-                                                                    <img src="assets/img/product/beverage-avo-smoothie.jpg"
-                                                                        alt="img" />
-                                                                </div>
-                                                                <div class="productcontet">
-                                                                    <h4>
-                                                                        {{ $customerCart->menu->menuName }}
-                                                                        <a href="javascript:void(0);" class="ms-2"
-                                                                            data-bs-toggle="modal" data-bs-target="#edit">
-                                                                            <img src="assets/img/icons/edit-5.svg"
-                                                                                alt="img" /></a>
-                                                                    </h4>
-                                                                    <div class="productlinkset">
-                                                                        <h5>{{ $customerCart->menu->price }}</h5>
+                                                    @foreach ($customerCart->orderItems as $orderItem)
+                                                        <ul class="product-lists">
+
+                                                            <li>
+                                                                <div class="productimg">
+                                                                    <div class="productimgs">
+                                                                        <img src="{{ asset('storage/' . $orderItem->menu->image) }}"
+                                                                            alt="img" />
                                                                     </div>
-                                                                    <div class="increment-decrement">
-                                                                        <div class="input-groups">
-                                                                            <input type="button" value="-"
-                                                                                class="button-minus dec button" />
-                                                                            <input type="text" value="1"
-                                                                                class="quantity-field"
-                                                                                data-order-id="{{ $customerCart->id }}" />
-                                                                            <input type="button" value="+"
-                                                                                class="button-plus inc button" />
+                                                                    <div class="productcontet">
+                                                                        <h4>
+                                                                            {{ $orderItem->menu->menuName }}
+                                                                            <a href="javascript:void(0);" class="ms-2"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#edit">
+                                                                                <img src="assets/img/icons/edit-5.svg"
+                                                                                    alt="img" /></a>
+                                                                        </h4>
+                                                                        <div class="productlinkset">
+                                                                            <h5>{{ $orderItem->menu->price }}</h5>
+                                                                        </div>
+                                                                        <div class="increment-decrement">
+                                                                            <div class="input-groups">
+                                                                                <input type="button" value="-"
+                                                                                    class="button-minus dec button" />
+                                                                                <input type="text" value="1"
+                                                                                    class="quantity-field"
+                                                                                    data-menu-id="{{ $orderItem->id }}" />
+                                                                                <input type="button" value="+"
+                                                                                    class="button-plus inc button" />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li id="menuPrice{{ $index }}">
-                                                            {{ $customerCart->menu->price }}</li>
-                                                        <li>
-                                                            <a class="confirm-text" href="javascript:void(0);"><img
-                                                                    src="assets/img/icons/delete-2.svg"
-                                                                    alt="img" /></a>
-                                                        </li>
-                                                    </ul>
-                                                    <input type="hidden" name="order_id" value="{{ $customerCart->id }}">
+                                                            </li>
+                                                            <li id="menuPrice{{ $index }}">
+                                                                {{ $orderItem->menu->price }}</li>
+                                                            <li>
+                                                                <button class="delete-item"
+                                                                    data-order-id="{{ $customerCart->id }}"
+                                                                    style="border: none; background: none; padding: 0; cursor: pointer;">
+                                                                    <img src="assets/img/icons/delete-2.svg"
+                                                                        alt="img" />
+                                                                </button>
+                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        $('.delete-item').click(function(event) {
+                                                                            event.preventDefault();
+                                                                            var orderId = $(this).data('order-id');
+
+                                                                            $.ajax({
+                                                                                type: 'POST',
+                                                                                url: '{{ route('deleteToCart') }}',
+                                                                                data: {
+                                                                                    _token: '{{ csrf_token() }}',
+                                                                                    order_id: orderId
+                                                                                },
+                                                                                success: function(response) {
+                                                                                    // Refresh the page or update the UI as needed
+                                                                                    location.reload(); // Example: Refresh the page
+                                                                                },
+                                                                                error: function(error) {
+                                                                                    console.error(error);
+                                                                                    // Handle errors or display a message to the user
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                </script>
+
+                                                            </li>
+
+                                                        </ul>
+                                                        <input type="hidden" name="order_id" value="{{ $orderID->id }}">
+                                                    @endforeach
                                                 @endforeach
                                                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                                                 <script>
@@ -113,12 +148,18 @@
                                                             });
                                                             $('#sub').text("₱" + total.toFixed(2));
 
-                                                            // Calculate discount (10% of subtotal)
-                                                            var discount = total * 0.1;
-                                                            $('#discount').text("₱" + discount.toFixed(2));
+                                                            var selectedDiscountType = $('#discountType').val();
+                                                            var discountAmount = 0;
 
-                                                            // Calculate discounted total
-                                                            var discountedTotal = total - discount;
+                                                            if (selectedDiscountType === 'PWD' || selectedDiscountType === 'Senior Citizen') {
+                                                                discountAmount = total * 0.1; // Assuming a 10% discount for PWD and Senior Citizen
+                                                            }
+
+                                                            // Update the displayed discount amount
+                                                            $('#discountAmount').text("₱" + discountAmount.toFixed(2));
+
+                                                            // Calculate discounted total after applying the discount
+                                                            var discountedTotal = total - discountAmount;
                                                             $('#discounted').text("₱" + discountedTotal.toFixed(2));
 
                                                             // Calculate service charge (10% of discounted total)
@@ -132,15 +173,21 @@
                                                             // Calculate total bill (discounted total + service charge + VAT)
                                                             var totalBill = discountedTotal + serviceCharge + vat;
                                                             $('#total').text("₱" + totalBill.toFixed(2));
+
+                                                            $('#discountTypeHidden').val(selectedDiscountType);
                                                         }
 
                                                         // Call the function initially
                                                         updateTotal();
+                                                        $('#discountType').change(function() {
+                                                            updateTotal(); // Update total when a discount type is selected
+                                                        });
+
                                                         var csrfToken = $('meta[name="csrf-token"]').attr("content");
                                                         $("#placeOrder").click(function() {
                                                             // Create an array to store order data
                                                             var orderData = [];
-
+                                                            var menuQuantity = {};
 
                                                             // Iterate through each quantity field
                                                             $(".quantity-field").each(function() {
@@ -152,17 +199,29 @@
                                                                     orderId: orderId,
                                                                     quantity: quantity
                                                                 });
+                                                                var menuId = $(this).data(
+                                                                "menu-id"); // Assuming you have a data attribute for menuId
+                                                                menuQuantity[menuId] = quantity;
                                                             });
+                                                            console.log('Order Data:', orderData);
+                                                            console.log('Menu Quantity:', menuQuantity);
 
+                                                            var selectedDiscountType = $('#discountType').val();
+                                                            var discountType = selectedDiscountType !== 'None' ? selectedDiscountType : null;
+
+                                                            var totalBill = parseFloat($('#total').text().replace('₱', ''));
                                                             // Send an AJAX request to your server to update the orders
                                                             $.ajax({
                                                                 type: "POST",
-                                                                url: "/update-quantity",
+                                                                url: "/update-order",
                                                                 headers: {
-                                                                    "X-CSRF-TOKEN": csrfToken,
+                                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                                                                 }, // Replace with the actual URL endpoint on your server
                                                                 data: {
-                                                                    orders: orderData
+                                                                    orders: orderData,
+                                                                    discountType: discountType,
+                                                                    totalBill: totalBill,
+                                                                    menuQuantity: menuQuantity
                                                                 },
                                                                 success: function(response) {
                                                                     // Handle the server response if needed
@@ -190,8 +249,23 @@
                                                             <h6 id="sub"></h6>
                                                         </li>
                                                         <li>
-                                                            <h5>10% Discount</h5>
-                                                            <h6 id="discount"></h6>
+                                                            <div class="col-lg-7">
+                                                                <div class="select-split ">
+                                                                    <div class="select-group w-100">
+                                                                        <select name="discountType" id="discountType"
+                                                                            class="select">
+                                                                            <option value="None">Select Discount Type
+                                                                            </option>
+                                                                            <option value="PWD">PWD (10% Discount)
+                                                                            </option>
+                                                                            <option value="Senior Citizen">Senior Citizen
+                                                                                (10% Discount)
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h6 id="discountAmount"> </h6>
                                                         </li>
                                                         <hr />
                                                         <li>
@@ -219,7 +293,10 @@
                                     </div>
                                 </div>
                                 <div style="text-align: right;">
-                                    <button class="btn btn-submit" id="placeOrder">Placed Order</button>
+                                    <a href="{{ route('customer.menu') }}" type="submit" class="btn btn-cancel">Back</a>
+                                    <a href="{{ route('customer.reservation') }}" class="btn btn-submit"
+                                        id="placeOrder">Placed Order</a>
+
                                 </div>
                             </form>
                         </div>
